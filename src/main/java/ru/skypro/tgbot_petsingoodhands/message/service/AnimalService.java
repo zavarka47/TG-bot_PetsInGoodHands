@@ -1,4 +1,4 @@
-package ru.skypro.tgbot_petsingoodhands.service;
+package ru.skypro.tgbot_petsingoodhands.message.service;
 
 import org.springframework.stereotype.Service;
 import ru.skypro.tgbot_petsingoodhands.entity.Animal;
