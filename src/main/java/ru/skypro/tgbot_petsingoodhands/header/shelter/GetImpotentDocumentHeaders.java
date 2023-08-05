@@ -4,6 +4,8 @@ import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
 import ru.skypro.tgbot_petsingoodhands.header.TelegramHeader;
 
+import java.util.Objects;
+
 public class GetImpotentDocumentHeaders implements TelegramHeader {
     private final SendMessage sendMessage;
 
@@ -13,7 +15,7 @@ public class GetImpotentDocumentHeaders implements TelegramHeader {
 
     @Override
     public boolean appliesTo(Update update) {
-        return false;
+        return Objects.nonNull(update.message()) ? update.message().text().equals("/start") : false;
     }
 
     @Override
