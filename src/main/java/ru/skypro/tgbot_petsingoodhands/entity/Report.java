@@ -21,6 +21,7 @@ public class Report {
     public Long getReportId() {
         return reportId;
     }
+    private boolean notificationAboutQualityReport;
 
     public Client getClient() {
         return client;
