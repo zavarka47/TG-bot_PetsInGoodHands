@@ -2,6 +2,7 @@ package ru.skypro.tgbot_petsingoodhands.service;
 
 import org.springframework.stereotype.Service;
 import ru.skypro.tgbot_petsingoodhands.entity.Client;
+import ru.skypro.tgbot_petsingoodhands.entity.Report;
 import ru.skypro.tgbot_petsingoodhands.repository.ClientRepository;
 import ru.skypro.tgbot_petsingoodhands.repository.ReportRepository;
 
@@ -56,8 +57,15 @@ public class ClientService {
 
     }
 
-
    public  List<Client> getClientByAdditionalTrailPeriod() {
        return clientRepository.getClientByAdditionalTrailPeriod(false);
    }
+
+    public  List<Client> getClientByBeginAdditionalTrailPeriodNotNullAndNotificationAdditionalTrailPeriodIsFalse() {
+        return clientRepository.getClientByBeginAdditionalTrailPeriodNotNullAndNotificationAdditionalTrailPeriodIsFalse();
+    }
+
+    public void saveClient(Client client) {
+        clientRepository.save(client);
+    }
 }

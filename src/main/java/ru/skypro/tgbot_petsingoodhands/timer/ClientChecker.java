@@ -44,15 +44,29 @@ public class ClientChecker {
 
     }
 
-    //@Scheduled(cron = "0 31 19 * * *")
-//    @Scheduled(fixedDelay = 30, timeUnit = TimeUnit.SECONDS)
-//    public void taskTrial() {
-//        List<Client> clients = clientService.getClientListWithoutReports();
-//        for (Client client: clients) {
-//            messages.sendSimpleMessage(5398232539l, client.getName());
-//
-//        }
-//    }
+    @Scheduled(cron = "0 31 19 * * *")
+    //@Scheduled(fixedDelay = 30, timeUnit = TimeUnit.SECONDS)
+    public void taskTrial() {
+        List<Client> clients = clientService.getClientListWithoutReports();
+        for (Client client: clients) {
+            messages.sendSimpleMessage(5398232539l, client.getName());
 
+        }
+    }
+
+    @Scheduled(fixedDelay = 30, timeUnit = TimeUnit.SECONDS)
+    public void taskCheckAditional() {
+
+        List<Client> clients = clientService.getClientByBeginAdditionalTrailPeriodNotNullAndNotificationAdditionalTrailPeriodIsFalse();
+        for (Client client: clients) {
+            messages.sendSimpleMessage(client.getChat_id(),
+                    "Добрый день  " + client.getName() +
+                            "! Вам назначен дополнительный испытательный срок c " + client.getBeginAdditionalTrailPeriod() +
+                            " на срок " + client.getAdditionalTrailPeriod() + " дней!");
+            client.setNotificationAdditionalTrailPeriod(true);
+            clientService.saveClient(client);
+
+        }
+    }
 
 }

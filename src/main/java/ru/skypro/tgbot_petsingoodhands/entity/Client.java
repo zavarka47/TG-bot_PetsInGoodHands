@@ -1,10 +1,13 @@
 package ru.skypro.tgbot_petsingoodhands.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
 @Entity
+@Data
 public class Client {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)

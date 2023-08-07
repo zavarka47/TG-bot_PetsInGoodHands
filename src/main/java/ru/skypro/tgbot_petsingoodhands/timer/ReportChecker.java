@@ -39,7 +39,13 @@ public class ReportChecker {
     }
 
     private boolean checkReport(Report report) {
-        return true;
+        boolean idGood = true;
+        if (report.getPhoto() == null) {
+            idGood = false;
+        } else if (report.getReport() == null) {
+            idGood = false;
+        }
+        return idGood;
     }
 
 }
