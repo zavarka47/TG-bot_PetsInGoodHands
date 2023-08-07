@@ -11,6 +11,6 @@ import java.util.List;
 public interface ClientRepository extends JpaRepository<Client, Long> {
     List<Client> findAllByShelter_ShelterId (Long shelterId);
 
-    @Query(value = "", nativeQuery = true)
-    List<Client> findClientWithoutReps();
+//    @Query(value = "", nativeQuery = true)
+//    List<Client> findClientWithoutReps();
 }
