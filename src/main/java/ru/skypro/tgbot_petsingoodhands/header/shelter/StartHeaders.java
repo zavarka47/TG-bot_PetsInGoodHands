@@ -8,7 +8,7 @@ import ru.skypro.tgbot_petsingoodhands.entity.Shelter;
 import ru.skypro.tgbot_petsingoodhands.header.TelegramHeader;
 import ru.skypro.tgbot_petsingoodhands.message.Messages;
 import ru.skypro.tgbot_petsingoodhands.message.service.ShelterService;
-
+import ru.skypro.tgbot_petsingoodhands.entity.Animal;
 import java.util.List;
 import java.util.Objects;
 import java.util.regex.Matcher;
@@ -18,12 +18,11 @@ import java.util.regex.Pattern;
 public final class StartHeaders implements TelegramHeader {
 
     private final Messages messages;
-    private final ShelterService shelterService;
+
     private final Pattern pattern = Pattern.compile("(1)(!!)(\\d+)(!!)(\\d+)(!!)(1)");
 
-    public StartHeaders(Messages messages, ShelterService shelterService) {
+    public StartHeaders(Messages messages) {
         this.messages = messages;
-        this.shelterService = shelterService;
     }
 
 
@@ -34,18 +33,15 @@ public final class StartHeaders implements TelegramHeader {
 
     @Override
     public void handleUpdate(Update update) {
-        Long chatId = update.callbackQuery().from().id();
+        InlineKeyboardMarkup keyBoard = new InlineKeyboardMarkup();
         Matcher matcher = pattern.matcher(update.callbackQuery().data());
         Long shelterId = Long.parseLong(matcher.group(5));
-        messages.sendSimpleMessage(chatId, shelterService.getShelterById(shelterId).getAbout());
-
-        List<Shelter> shelters = shelterService.getSheltersByAnimalTypeId(Long.parseLong(matcher.group(3)));
-        InlineKeyboardMarkup keyBoard = new InlineKeyboardMarkup();
-        for (Shelter s : shelters) {
-            InlineKeyboardButton button = new InlineKeyboardButton(s.getShelterId().toString()).callbackData("(1)(!!)(" + s.getAnimal().getAnimalId() + ")(!!)(" + s.getShelterId() + "(!!)(1)");
-            keyBoard.addRow(button);
-        }
+        InlineKeyboardButton button1 = new InlineKeyboardButton("Собаки").callbackData("(1)(!!)(" + shelterId + ")(!!)(1)");
+        InlineKeyboardButton button2 = new InlineKeyboardButton("Кошки").callbackData("(1)(!!)(" + shelterId + ")(!!)(2)");
+        InlineKeyboardButton button3 = new InlineKeyboardButton("Позвать волонтера").callbackData("0");
+        keyBoard.addRow(button1, button2, button3);
+        messages.sendMessageWithKeyboard(update.callbackQuery().from().id(), "Выберите животное, которое хотели бы приютить", keyBoard);
 
     }
-    }
+}
 

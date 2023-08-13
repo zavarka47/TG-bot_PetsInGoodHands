@@ -18,7 +18,7 @@ public class GetContactShelterHeaders implements TelegramHeader {
     private final SendMessage sendMessage;
     private final Messages messages;
     private final ShelterService shelterService;
-    private final Pattern pattern = Pattern.compile("(1)(!!)(\\d+)(!!)(\\d+)(!!)(1)");
+    private final Pattern pattern = Pattern.compile("(1)(!!)(shelter_id)(!!)(2)");
 
     public GetContactShelterHeaders(SendMessage sendMessage, Messages messages, ShelterService shelterService) {
         this.sendMessage = sendMessage;
@@ -37,14 +37,9 @@ public class GetContactShelterHeaders implements TelegramHeader {
         Long chatId = update.callbackQuery().from().id();
         Matcher matcher = pattern.matcher(update.callbackQuery().data());
         Long shelterId = Long.parseLong(matcher.group(5));
-        messages.sendSimpleMessage(chatId, shelterService.getShelterById(shelterId).getAbout());
+        messages.sendSimpleMessage(chatId, shelterService.getShelterById(shelterId).getContacts());
 
-        List<Shelter> shelters = shelterService.getSheltersByAnimalTypeId(Long.parseLong(matcher.group(3)));
-        InlineKeyboardMarkup keyBoard = new InlineKeyboardMarkup();
-        for (Shelter s: shelters) {
-            InlineKeyboardButton button = new InlineKeyboardButton(s.getShelterId().toString()).callbackData("(1)(!!)("+s.getAnimal().getAnimalId()+")(!!)("+s.getShelterId()+"(!!)(1)");
-            keyBoard.addRow(button);
         }
 
     }
-}
+

@@ -18,8 +18,11 @@ import java.util.regex.Pattern;
 public class AboutShelterHeaders implements TelegramHeader {
     private final Messages messages;
     private final ShelterService shelterService;
-    private final Pattern pattern = Pattern.compile("(1)(!!)(\\d+)(!!)(\\d+)(!!)(1)");
-
+    private final Pattern pattern = Pattern.compile("(1)(!!)(shelter_id)(!!)(1)");
+    /* Группа 1 - вход в меню "Узнать информацию о приюте"
+    Группа 3 - соответствует ID Приюта
+    Группа 5 - соответствует команде которую мы хотим получить
+    */
     public AboutShelterHeaders(Messages messages, ShelterService shelterService) {
         this.messages = messages;
         this.shelterService = shelterService;
@@ -36,14 +39,9 @@ public class AboutShelterHeaders implements TelegramHeader {
         Long chatId = update.callbackQuery().from().id();
         Matcher matcher = pattern.matcher(update.callbackQuery().data());
         Long shelterId = Long.parseLong(matcher.group(5));
-        messages.sendSimpleMessage(chatId, shelterService.getShelterById(shelterId).getAbout());
+        messages.sendSimpleMessage(chatId, shelterService.getShelterById(shelterId).getAbout());/// Будет меняться метод get в зависимости от цифры указанной в 5 группе
 
-        List<Shelter> shelters = shelterService.getSheltersByAnimalTypeId(Long.parseLong(matcher.group(3)));
-        InlineKeyboardMarkup keyBoard = new InlineKeyboardMarkup();
-        for (Shelter s: shelters) {
-            InlineKeyboardButton button = new InlineKeyboardButton(s.getShelterId().toString()).callbackData("(1)(!!)("+s.getAnimal().getAnimalId()+")(!!)("+s.getShelterId()+"(!!)(1)");
-            keyBoard.addRow(button);
         }
 
     }
-}
+
