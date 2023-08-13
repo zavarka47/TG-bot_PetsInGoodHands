@@ -35,9 +35,9 @@ public final class StartHeaders implements TelegramHeader {
     public void handleUpdate(Update update) {
         InlineKeyboardMarkup keyBoard = new InlineKeyboardMarkup();
         Matcher matcher = pattern.matcher(update.callbackQuery().data());
-        Long shelterId = Long.parseLong(matcher.group(5));
-        InlineKeyboardButton button1 = new InlineKeyboardButton("Собаки").callbackData("(1)(!!)(" + shelterId + ")(!!)(1)");
-        InlineKeyboardButton button2 = new InlineKeyboardButton("Кошки").callbackData("(1)(!!)(" + shelterId + ")(!!)(2)");
+        Long animalId = Long.parseLong(matcher.group(5));
+        InlineKeyboardButton button1 = new InlineKeyboardButton("Собаки").callbackData("(1)(!!)(" + animalId + ")(!!)(1)");
+        InlineKeyboardButton button2 = new InlineKeyboardButton("Кошки").callbackData("(1)(!!)(" + animalId + ")(!!)(2)");
         InlineKeyboardButton button3 = new InlineKeyboardButton("Позвать волонтера").callbackData("0");
         keyBoard.addRow(button1, button2, button3);
         messages.sendMessageWithKeyboard(update.callbackQuery().from().id(), "Выберите животное, которое хотели бы приютить", keyBoard);
