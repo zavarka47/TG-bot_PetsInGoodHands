@@ -69,4 +69,17 @@ public class ClientChecker {
         }
     }
 
+    @Scheduled(fixedDelay = 30, timeUnit = TimeUnit.SECONDS)
+    public void taskCheckTrialIsOver() {
+
+        List<Client> clients = clientService.getClientsByTrailPeriodIsOverTrueAndNotificationTrailPeriodIsOverFalse();
+        for (Client client: clients) {
+            messages.sendSimpleMessage(client.getChat_id(),
+                    "Добрый день  " + client.getName() +
+                            "! Ваш испытательный срок c завершен !");
+            client.setNotificationTrailPeriodIsOver(true);
+            clientService.saveClient(client);
+        }
+    }
+
 }

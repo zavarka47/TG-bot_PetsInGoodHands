@@ -61,11 +61,17 @@ public class ClientService {
        return clientRepository.getClientByAdditionalTrailPeriod(false);
    }
 
-    public  List<Client> getClientByBeginAdditionalTrailPeriodNotNullAndNotificationAdditionalTrailPeriodIsFalse() {
+    public List<Client> getClientByBeginAdditionalTrailPeriodNotNullAndNotificationAdditionalTrailPeriodIsFalse() {
         return clientRepository.getClientByBeginAdditionalTrailPeriodNotNullAndNotificationAdditionalTrailPeriodIsFalse();
     }
 
-    public void saveClient(Client client) {
-        clientRepository.save(client);
+    public Client saveClient(Client client) {
+        return clientRepository.save(client);
+    }
+
+    public List<Client> getClientsByTrailPeriodIsOverTrueAndNotificationTrailPeriodIsOverFalse() {
+
+        return clientRepository.getClientsByTrailPeriodIsOverTrueAndNotificationTrailPeriodIsOverFalse();
+
     }
 }

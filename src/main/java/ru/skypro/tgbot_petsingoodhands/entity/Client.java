@@ -21,9 +21,10 @@ public class Client {
     private Long chat_id;
     private LocalDate beginTrailPeriod;
     private boolean trailPeriodIsOver;
+    private boolean notificationTrailPeriodIsOver;
     private Integer additionalTrailPeriod;
     private LocalDate beginAdditionalTrailPeriod;
-    private boolean notificationAdditionalTrailPeriod ;
+    private boolean notificationAdditionalTrailPeriod;
 
     @OneToMany (mappedBy = "client")
     private List<Report> reports;

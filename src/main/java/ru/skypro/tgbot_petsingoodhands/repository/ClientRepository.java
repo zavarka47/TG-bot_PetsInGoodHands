@@ -25,6 +25,6 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
 
     List<Client> getClientByBeginAdditionalTrailPeriodNotNullAndNotificationAdditionalTrailPeriodIsFalse();
 
-
+    List<Client> getClientsByTrailPeriodIsOverTrueAndNotificationTrailPeriodIsOverFalse();
 
 }
