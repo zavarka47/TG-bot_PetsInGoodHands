@@ -1,9 +1,12 @@
 package ru.skypro.tgbot_petsingoodhands.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Data
 public class Report {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -18,4 +21,24 @@ public class Report {
     @Lob
     private byte[] report;
 
+    public Long getReportId() {
+        return reportId;
+    }
+    private boolean notificationAboutQualityReport;
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public LocalDateTime getDataTimeReport() {
+        return dataTimeReport;
+    }
+
+    public void setDataTimeReport(LocalDateTime dataTimeReport) {
+        this.dataTimeReport = dataTimeReport;
+    }
 }
