@@ -1,9 +1,12 @@
 package ru.skypro.tgbot_petsingoodhands.service;
 
 import org.springframework.stereotype.Service;
+import ru.skypro.tgbot_petsingoodhands.entity.Client;
+import ru.skypro.tgbot_petsingoodhands.entity.Report;
 import ru.skypro.tgbot_petsingoodhands.repository.ReportRepository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class ReportService {
@@ -11,7 +14,11 @@ public class ReportService {
     public ReportService (ReportRepository reportRepository){
         this.reportRepository = reportRepository;
     }
-    public boolean yesterdayReportIsExist (){
+
+    /**
+     * Метод возвращает список Report, которые были созданы за последние сутки
+     */
+    public List<Report> yesterdayReportIsExist (){
         return reportRepository.getReportByDataTimeReportAfter(LocalDateTime.now().minusDays(1));
     }
 }
