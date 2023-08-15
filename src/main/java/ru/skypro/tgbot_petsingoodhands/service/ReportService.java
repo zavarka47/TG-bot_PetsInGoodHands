@@ -21,4 +21,14 @@ public class ReportService {
     public List<Report> yesterdayReportIsExist (){
         return reportRepository.getReportByDataTimeReportAfter(LocalDateTime.now().minusDays(1));
     }
+
+    public List<Report> getReportByNotificationAboutQualityReport() {
+
+       return reportRepository.getReportByNotificationAboutQualityReport(false);
+
+    }
+
+    public void saveReport(Report report) {
+        reportRepository.save(report);
+    }
 }

@@ -2,9 +2,12 @@ package ru.skypro.tgbot_petsingoodhands.service;
 
 import org.springframework.stereotype.Service;
 import ru.skypro.tgbot_petsingoodhands.entity.Client;
+import ru.skypro.tgbot_petsingoodhands.entity.Report;
 import ru.skypro.tgbot_petsingoodhands.repository.ClientRepository;
 import ru.skypro.tgbot_petsingoodhands.repository.ReportRepository;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -42,5 +45,33 @@ public class ClientService {
             }
         }
         return clientsHaveNotReport;
+    }
+
+    public List<Client> getClientListWithoutReports() {
+
+        LocalDateTime localDateTime = LocalDateTime.now().minusDays(1);
+        LocalDateTime endDate = localDateTime.toLocalDate().atTime(LocalTime.MAX);
+        LocalDateTime startDate = localDateTime.toLocalDate().atTime(LocalTime.MIN);
+
+        return clientRepository.getClientListWithoutReports(startDate, endDate);
+
+    }
+
+   public  List<Client> getClientByAdditionalTrailPeriod() {
+       return clientRepository.getClientByAdditionalTrailPeriod(false);
+   }
+
+    public List<Client> getClientByBeginAdditionalTrailPeriodNotNullAndNotificationAdditionalTrailPeriodIsFalse() {
+        return clientRepository.getClientByBeginAdditionalTrailPeriodNotNullAndNotificationAdditionalTrailPeriodIsFalse();
+    }
+
+    public Client saveClient(Client client) {
+        return clientRepository.save(client);
+    }
+
+    public List<Client> getClientsByTrailPeriodIsOverTrueAndNotificationTrailPeriodIsOverFalse() {
+
+        return clientRepository.getClientsByTrailPeriodIsOverTrueAndNotificationTrailPeriodIsOverFalse();
+
     }
 }
