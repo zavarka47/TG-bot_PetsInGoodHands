@@ -1,15 +1,11 @@
 package ru.skypro.tgbot_petsingoodhands.header.shelter;
 
 import com.pengrad.telegrambot.model.Update;
-import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
-import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import com.pengrad.telegrambot.request.SendMessage;
-import ru.skypro.tgbot_petsingoodhands.entity.Shelter;
 import ru.skypro.tgbot_petsingoodhands.header.TelegramHeader;
 import ru.skypro.tgbot_petsingoodhands.message.Messages;
-import ru.skypro.tgbot_petsingoodhands.message.service.ShelterService;
+import ru.skypro.tgbot_petsingoodhands.service.ShelterService;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
