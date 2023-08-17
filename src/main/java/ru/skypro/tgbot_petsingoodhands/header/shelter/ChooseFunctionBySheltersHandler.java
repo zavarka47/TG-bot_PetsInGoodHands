@@ -12,7 +12,7 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 @Component
-public class ChooseFunctionBySheltersHeaders implements TelegramHandler {
+public class ChooseFunctionBySheltersHandler implements TelegramHandler {
     private final Messages messages;
     private final Pattern pattern = Pattern.compile("(1)(!!)(\\d+)(!!)(\\d+)(!!)(1)");
 

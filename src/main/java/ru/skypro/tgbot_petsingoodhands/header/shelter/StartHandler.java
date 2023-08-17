@@ -5,7 +5,7 @@ import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
 import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import org.springframework.stereotype.Component;
 import ru.skypro.tgbot_petsingoodhands.entity.Animal;
-import ru.skypro.tgbot_petsingoodhands.header.TelegramHeader;
+import ru.skypro.tgbot_petsingoodhands.header.TelegramHandler;
 import ru.skypro.tgbot_petsingoodhands.message.Messages;
 import ru.skypro.tgbot_petsingoodhands.service.AnimalService;
 
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Component
-public final class StartHandler implements TelegramHeader {
+public final class StartHandler implements TelegramHandler {
 
     private final Messages messages;
     private final AnimalService animalService;

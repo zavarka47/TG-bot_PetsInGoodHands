@@ -14,7 +14,7 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 @Component
-public class ChooseShelterHeaders implements TelegramHandler {
+public class ChooseShelterHandler implements TelegramHandler {
     private final Messages messages;
     private final ShelterService shelterService;
     private final Pattern pattern = Pattern.compile("\\d+");
@@ -39,7 +39,7 @@ public class ChooseShelterHeaders implements TelegramHandler {
         List<Shelter> shelters = shelterService.getSheltersByAnimalTypeId(animalId);
         InlineKeyboardMarkup keyBoard = new InlineKeyboardMarkup();
         for (Shelter s : shelters) {
-            InlineKeyboardButton button = new InlineKeyboardButton(s.getShelterId().toString()).callbackData("(1)(!!)(" + s.getAnimal().getAnimalId() + ")(!!)(" + s.getShelterId() + "(!!)(1)");/// под вопросом getAnimalId
+            InlineKeyboardButton button = new InlineKeyboardButton(s.getShelterName()).callbackData("(1)(!!)(" + s.getAnimal().getAnimalId() + ")(!!)(" + s.getShelterId() + "(!!)(1)");/// под вопросом getAnimalId
             keyBoard.addRow(button);
         }
 messages.sendMessageWithKeyboard(chatId,"Выберете приют",keyBoard);
