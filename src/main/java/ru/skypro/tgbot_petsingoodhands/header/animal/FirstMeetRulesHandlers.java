@@ -2,7 +2,7 @@ package ru.skypro.tgbot_petsingoodhands.header.animal;
 
 import com.pengrad.telegrambot.model.Update;
 import org.springframework.stereotype.Component;
-import ru.skypro.tgbot_petsingoodhands.header.TelegramHeader;
+import ru.skypro.tgbot_petsingoodhands.header.TelegramHandler;
 import ru.skypro.tgbot_petsingoodhands.message.Messages;
 import ru.skypro.tgbot_petsingoodhands.service.AnimalService;
 
@@ -10,7 +10,7 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 @Component
-public class FirstMeetRulesHandlers implements TelegramHeader {
+public class FirstMeetRulesHandlers implements TelegramHandler {
 
     private final Messages messages;
     private final AnimalService animalService;

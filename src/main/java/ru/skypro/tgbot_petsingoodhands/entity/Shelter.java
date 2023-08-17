@@ -9,6 +9,7 @@ public class Shelter {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column (name = "shelter_id")
     private Long shelterId;
+    private String ShelterName;
     @ManyToOne
     @JoinColumn (name = "animalId")
     private Animal animal;
@@ -20,6 +21,8 @@ public class Shelter {
     private String documentsForAdoption;
     @OneToMany (mappedBy = "shelter")
     private List<Client> clientsBase;
+    @OneToMany (mappedBy = "shelter")
+    private List<Volunteer> volunteers;
 
     public Long getShelterId() {
         return shelterId;
@@ -51,5 +54,13 @@ public class Shelter {
 
     public String getDocumentsForAdoption() {
         return documentsForAdoption;
+    }
+
+    public String getShelterName() {
+        return ShelterName;
+    }
+
+    public void setShelterName(String shelterName) {
+        ShelterName = shelterName;
     }
 }

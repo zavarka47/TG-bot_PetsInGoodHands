@@ -3,7 +3,7 @@ package ru.skypro.tgbot_petsingoodhands.header.shelter;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
 import org.springframework.stereotype.Component;
-import ru.skypro.tgbot_petsingoodhands.header.TelegramHeader;
+import ru.skypro.tgbot_petsingoodhands.header.TelegramHandler;
 import ru.skypro.tgbot_petsingoodhands.message.Messages;
 import ru.skypro.tgbot_petsingoodhands.service.ShelterService;
 
@@ -11,7 +11,7 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 @Component
-public class GetContactShelterHandler implements TelegramHeader {
+public class GetContactShelterHandler implements TelegramHandler {
 
     private final Messages messages;
     private final ShelterService shelterService;
