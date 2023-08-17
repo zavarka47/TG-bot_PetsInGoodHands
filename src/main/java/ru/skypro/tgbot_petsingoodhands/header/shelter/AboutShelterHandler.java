@@ -1,6 +1,7 @@
 package ru.skypro.tgbot_petsingoodhands.header.shelter;
 
 import com.pengrad.telegrambot.model.Update;
+import org.springframework.stereotype.Component;
 import ru.skypro.tgbot_petsingoodhands.header.TelegramHeader;
 import ru.skypro.tgbot_petsingoodhands.message.Messages;
 import ru.skypro.tgbot_petsingoodhands.service.ShelterService;
@@ -8,8 +9,8 @@ import ru.skypro.tgbot_petsingoodhands.service.ShelterService;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-public class AboutShelterHeaders implements TelegramHeader {
+@Component
+public class AboutShelterHandler implements TelegramHeader {
     private final Messages messages;
     private final ShelterService shelterService;
     private final Pattern pattern = Pattern.compile("(1)(!!)(shelter_id)(!!)(1)");
@@ -17,7 +18,7 @@ public class AboutShelterHeaders implements TelegramHeader {
     Группа 3 - соответствует ID Приюта
     Группа 5 - соответствует команде которую мы хотим получить
     */
-    public AboutShelterHeaders(Messages messages, ShelterService shelterService) {
+    public AboutShelterHandler(Messages messages, ShelterService shelterService) {
         this.messages = messages;
         this.shelterService = shelterService;
     }
@@ -25,7 +26,7 @@ public class AboutShelterHeaders implements TelegramHeader {
 
     @Override
     public boolean appliesTo(Update update) {
-        return Objects.nonNull(update.message()) ? pattern.matcher(update.callbackQuery().data()).find() : false;
+        return Objects.nonNull(update.callbackQuery()) ? pattern.matcher(update.callbackQuery().data()).find() : false;
     }
 
     @Override

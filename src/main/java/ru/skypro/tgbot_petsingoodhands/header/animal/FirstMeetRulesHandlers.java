@@ -23,7 +23,7 @@ public class FirstMeetRulesHandlers implements TelegramHeader {
 
     @Override
     public boolean appliesTo(Update update) {
-        return Objects.nonNull(update.message()) && pattern.matcher(update.callbackQuery().data()).find();
+        return Objects.nonNull(update.callbackQuery()) && pattern.matcher(update.callbackQuery().data()).find();
     }
 
     /* Добавить поле первичные правила знакомста с животными или это FirstImpressionInShelter?

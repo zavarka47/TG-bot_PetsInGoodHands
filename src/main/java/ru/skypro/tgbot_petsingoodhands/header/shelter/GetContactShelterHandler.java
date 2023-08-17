@@ -2,6 +2,7 @@ package ru.skypro.tgbot_petsingoodhands.header.shelter;
 
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
+import org.springframework.stereotype.Component;
 import ru.skypro.tgbot_petsingoodhands.header.TelegramHeader;
 import ru.skypro.tgbot_petsingoodhands.message.Messages;
 import ru.skypro.tgbot_petsingoodhands.service.ShelterService;
@@ -9,15 +10,14 @@ import ru.skypro.tgbot_petsingoodhands.service.ShelterService;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+@Component
+public class GetContactShelterHandler implements TelegramHeader {
 
-public class GetContactShelterHeaders implements TelegramHeader {
-    private final SendMessage sendMessage;
     private final Messages messages;
     private final ShelterService shelterService;
     private final Pattern pattern = Pattern.compile("(1)(!!)(shelter_id)(!!)(2)");
 
-    public GetContactShelterHeaders(SendMessage sendMessage, Messages messages, ShelterService shelterService) {
-        this.sendMessage = sendMessage;
+    public GetContactShelterHandler( Messages messages, ShelterService shelterService) {
         this.messages = messages;
         this.shelterService = shelterService;
     }
@@ -25,7 +25,7 @@ public class GetContactShelterHeaders implements TelegramHeader {
 
     @Override
     public boolean appliesTo(Update update) {
-        return Objects.nonNull(update.message()) ? pattern.matcher(update.callbackQuery().data()).find() : false;
+        return Objects.nonNull(update.callbackQuery()) ? pattern.matcher(update.callbackQuery().data()).find() : false;
     }
 
     @Override
