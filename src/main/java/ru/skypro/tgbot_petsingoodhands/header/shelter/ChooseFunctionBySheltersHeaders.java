@@ -3,15 +3,14 @@ package ru.skypro.tgbot_petsingoodhands.header.shelter;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
 import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
-import ru.skypro.tgbot_petsingoodhands.entity.Shelter;
-import ru.skypro.tgbot_petsingoodhands.header.TelegramHeader;
+import ru.skypro.tgbot_petsingoodhands.header.TelegramHandler;
 import ru.skypro.tgbot_petsingoodhands.message.Messages;
 
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ChooseFunctionBySheltersHeaders implements TelegramHeader {
+public class ChooseFunctionBySheltersHeaders implements TelegramHandler {
     private final Messages messages;
     private final Pattern pattern = Pattern.compile("(1)(!!)(\\d+)(!!)(\\d+)(!!)(1)");
 

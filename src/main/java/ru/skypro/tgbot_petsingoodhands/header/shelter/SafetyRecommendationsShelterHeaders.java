@@ -1,7 +1,7 @@
 package ru.skypro.tgbot_petsingoodhands.header.shelter;
 
 import com.pengrad.telegrambot.model.Update;
-import ru.skypro.tgbot_petsingoodhands.header.TelegramHeader;
+import ru.skypro.tgbot_petsingoodhands.header.TelegramHandler;
 import ru.skypro.tgbot_petsingoodhands.message.Messages;
 import ru.skypro.tgbot_petsingoodhands.service.ShelterService;
 
@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class SafetyRecommendationsShelterHeaders implements TelegramHeader {
+public class SafetyRecommendationsShelterHeaders implements TelegramHandler {
     private final Messages messages;
     private final ShelterService shelterService;
     private final Pattern pattern = Pattern.compile("(1)(!!)(\\d+)(!!)(\\d+)(!!)(1)");
