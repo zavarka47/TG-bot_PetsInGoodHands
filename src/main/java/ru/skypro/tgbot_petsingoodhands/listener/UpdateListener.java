@@ -6,24 +6,21 @@ import com.pengrad.telegrambot.model.Update;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import ru.skypro.tgbot_petsingoodhands.header.TelegramHeader;
+import ru.skypro.tgbot_petsingoodhands.header.TelegramHandler;
 import ru.skypro.tgbot_petsingoodhands.message.Messages;
-import ru.skypro.tgbot_petsingoodhands.repository.AnimalRepository;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
-import java.util.logging.Handler;
 
 @Component
 public class UpdateListener implements UpdatesListener {
     private final TelegramBot telegramBot;
-    private final List<TelegramHeader> handlers;
+    private final List<TelegramHandler> handlers;
     private final Messages messages;
     private Logger logger = LoggerFactory.getLogger(UpdateListener.class);
 
-    public UpdateListener(TelegramBot telegramBot, List<TelegramHeader> handlers, Messages messages) {
+    public UpdateListener(TelegramBot telegramBot, List<TelegramHandler> handlers, Messages messages) {
         this.telegramBot = telegramBot;
         this.handlers = handlers;
         this.messages = messages;
@@ -47,7 +44,7 @@ public class UpdateListener implements UpdatesListener {
                 }
 
                 boolean messageHandler = false;
-                for (TelegramHeader handler : handlers) {
+                for (TelegramHandler handler : handlers) {
                     if (handler.appliesTo(update)){
                         handler.handleUpdate(update);
                     }

@@ -2,7 +2,7 @@ package ru.skypro.tgbot_petsingoodhands.header.shelter;
 
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
-import ru.skypro.tgbot_petsingoodhands.header.TelegramHeader;
+import ru.skypro.tgbot_petsingoodhands.header.TelegramHandler;
 import ru.skypro.tgbot_petsingoodhands.message.Messages;
 import ru.skypro.tgbot_petsingoodhands.service.ShelterService;
 
@@ -10,7 +10,7 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class GetContactShelterHeaders implements TelegramHeader {
+public class GetContactShelterHeaders implements TelegramHandler {
     private final SendMessage sendMessage;
     private final Messages messages;
     private final ShelterService shelterService;

@@ -1,7 +1,7 @@
 package ru.skypro.tgbot_petsingoodhands.header.animal;
 
 import com.pengrad.telegrambot.model.Update;
-import ru.skypro.tgbot_petsingoodhands.header.TelegramHeader;
+import ru.skypro.tgbot_petsingoodhands.header.TelegramHandler;
 import ru.skypro.tgbot_petsingoodhands.message.Messages;
 import ru.skypro.tgbot_petsingoodhands.service.AnimalService;
 
@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class TransportationPetHandler implements TelegramHeader {
+public class TransportationPetHandler implements TelegramHandler {
 
     private final Messages messages;
     private final AnimalService animalService;

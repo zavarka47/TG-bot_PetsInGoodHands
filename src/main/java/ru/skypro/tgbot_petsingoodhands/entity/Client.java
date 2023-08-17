@@ -25,7 +25,6 @@ public class Client {
     private Integer additionalTrailPeriod;
     private LocalDate beginAdditionalTrailPeriod;
     private boolean notificationAdditionalTrailPeriod;
-
     @OneToMany (mappedBy = "client")
     private List<Report> reports;
 
