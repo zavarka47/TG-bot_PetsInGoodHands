@@ -26,7 +26,7 @@ public class HouseForAdultPetHandler  implements TelegramHeader {
 
     @Override
     public boolean appliesTo(Update update) {
-        return Objects.nonNull(update.message()) && pattern.matcher(update.callbackQuery().data()).find();
+        return Objects.nonNull(update.callbackQuery()) && pattern.matcher(update.callbackQuery().data()).find();
     }
 
     @Override
