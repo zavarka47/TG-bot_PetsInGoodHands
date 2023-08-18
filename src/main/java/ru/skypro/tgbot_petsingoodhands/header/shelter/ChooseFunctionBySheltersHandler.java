@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 @Component
 public class ChooseFunctionBySheltersHandler implements TelegramHandler {
     private final Messages messages;
-    private final Pattern pattern = Pattern.compile("(1)(!!)(\\d+)(!!)(\\d+)(!!)(1)");
+    private final Pattern pattern = Pattern.compile("0.0.0.1.1.\\d+");
 
     public ChooseFunctionBySheltersHandler(Messages messages) {
         this.messages = messages;
@@ -28,15 +28,15 @@ public class ChooseFunctionBySheltersHandler implements TelegramHandler {
     @Override
     public void handleUpdate(Update update) {
         InlineKeyboardMarkup keyBoard = new InlineKeyboardMarkup();
-        Matcher matcher = pattern.matcher(update.callbackQuery().data());
-        Long shelterId = Long.parseLong(matcher.group(5));
+        Long shelterId = Long.parseLong(update.callbackQuery().data().substring(10));
         InlineKeyboardButton button1 = new InlineKeyboardButton("Узнать о приюте").callbackData("(1)(!!)(" + shelterId + ")(!!)(1)");
         InlineKeyboardButton button2 = new InlineKeyboardButton("Узнать расписание работы приюта и адрес, схему проезда").callbackData("(1)(!!)(" + shelterId + ")(!!)(2)");
         InlineKeyboardButton button3 = new InlineKeyboardButton("Узнать контактные данные охраны для оформления пропуска на машину.").callbackData("(1)(!!)(" + shelterId + ")(!!)(3)");
         InlineKeyboardButton button4 = new InlineKeyboardButton("Узнать общие рекомендации о технике безопасности на территории приюта.").callbackData("(1)(!!)(" + shelterId + ")(!!)(4)");
         InlineKeyboardButton button5 = new InlineKeyboardButton("Принять и записать контактные данные для связи.").callbackData("(1)(!!)(" + shelterId + ")(!!)(5)");
         InlineKeyboardButton button6 = new InlineKeyboardButton("Узнать о приюте").callbackData("0");
-        keyBoard.addRow(button1, button2, button3, button4, button5, button6);
+        keyBoard.addRow(button1).addRow(button2).addRow(button3).addRow(button4).addRow(button5).addRow(button6);
+
         messages.sendMessageWithKeyboard(update.callbackQuery().from().id(), "Выберете пункт который Вас интересует", keyBoard);
 
 
