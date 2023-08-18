@@ -17,13 +17,12 @@ import java.util.regex.Pattern;
 public class ChooseShelterHandler implements TelegramHandler {
     private final Messages messages;
     private final ShelterService shelterService;
-    private final Pattern pattern = Pattern.compile("\\d+");
+    private final Pattern pattern = Pattern.compile("0.0.0.0.0.\\d+");
 
     public ChooseShelterHandler(Messages messages, ShelterService shelterService) {
         this.messages = messages;
         this.shelterService = shelterService;
     }
-
 
     @Override
     public boolean appliesTo(Update update) {
@@ -33,13 +32,14 @@ public class ChooseShelterHandler implements TelegramHandler {
     @Override
     public void handleUpdate(Update update) {
         Long chatId = update.callbackQuery().from().id();
-        Long animalId = Long.parseLong(update.callbackQuery().data());
+        Long animalId = Long.parseLong(update.callbackQuery().data().substring(10));
+
 
 
         List<Shelter> shelters = shelterService.getSheltersByAnimalTypeId(animalId);
         InlineKeyboardMarkup keyBoard = new InlineKeyboardMarkup();
         for (Shelter s : shelters) {
-            InlineKeyboardButton button = new InlineKeyboardButton(s.getShelterName()).callbackData("(1)(!!)(" + s.getAnimal().getAnimalId() + ")(!!)(" + s.getShelterId() + "(!!)(1)");/// под вопросом getAnimalId
+            InlineKeyboardButton button = new InlineKeyboardButton(s.getShelterName()).callbackData("0.0.0.0.1." + s.getShelterId());
             keyBoard.addRow(button);
         }
 messages.sendMessageWithKeyboard(chatId,"Выберете приют",keyBoard);

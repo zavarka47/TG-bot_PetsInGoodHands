@@ -26,7 +26,7 @@ public final class StartHandler implements TelegramHandler {
 
     @Override
     public boolean appliesTo(Update update) {
-        return Objects.nonNull(update.message()) ? update.message().text().equals("/start") : false;
+        return Objects.nonNull(update.message()) && update.message().text().equals("/start");
     }
 
     @Override
@@ -34,7 +34,7 @@ public final class StartHandler implements TelegramHandler {
         InlineKeyboardMarkup keyBoard = new InlineKeyboardMarkup();
         List<Animal> animals = animalService.getAll();
         for (Animal a : animals) {
-            InlineKeyboardButton button = new InlineKeyboardButton(a.getType()).callbackData(a.getAnimalId().toString());
+            InlineKeyboardButton button = new InlineKeyboardButton(a.getType()).callbackData("0.0.0.0.0."+a.getAnimalId().toString());
             keyBoard.addRow(button);
         }
         messages.sendMessageWithKeyboard(update.message().chat().id(), "Выберите животное, которое хотели бы приютить", keyBoard);
