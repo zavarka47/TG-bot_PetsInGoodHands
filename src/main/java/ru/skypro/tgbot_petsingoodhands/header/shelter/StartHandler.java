@@ -26,7 +26,7 @@ public final class StartHandler implements TelegramHandler {
 
     @Override
     public boolean appliesTo(Update update) {
-        return Objects.nonNull(update.message()) ? update.message().text().equals("/start") : false;
+        return Objects.nonNull(update.message()) && update.message().text().equals("/start");
     }
 
     @Override

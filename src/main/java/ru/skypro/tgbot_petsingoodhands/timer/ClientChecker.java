@@ -15,7 +15,6 @@ import java.util.concurrent.TimeUnit;
 public class ClientChecker {
 
     private final TelegramBot telegramBot;
-
     private final Messages messages;
     private final ClientService clientService;
 
