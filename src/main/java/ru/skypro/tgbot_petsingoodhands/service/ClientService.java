@@ -74,4 +74,8 @@ public class ClientService {
         return clientRepository.getClientsByTrailPeriodIsOverTrueAndNotificationTrailPeriodIsOverFalse();
 
     }
+
+    public List<Client> getClientListWithoutReportsMoreThan2Days() {
+        return clientRepository.getClientListWithoutReportsMoreThan2Days();
+    }
 }

@@ -21,6 +21,21 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
             "WHERE not client.trail_period_is_over = true and coalesce(reports.client_id, 0) = 0", nativeQuery = true)
     List<Client> getClientListWithoutReports(LocalDateTime startDate, LocalDateTime endDate);
 
+    @Query(value = "select \n" +
+            "\t*, \n" +
+            "\t (select \n" +
+            "\t\tdate_part('day', now() - max(rep.data_time_report)) as days\n" +
+            "\tfrom report as rep\n" +
+            "\twhere rep.client_id = client.client_id \n" +
+            "\t) AS rep_days\n" +
+            "from\n" +
+            "\tpublic.client AS client\n" +
+            "where  (select \n" +
+            "\t\tdate_part('day', now() - max(rep.data_time_report)) as days\n" +
+            "\tfrom report as rep\n" +
+            "\twhere rep.client_id = client.client_id ) >= 2", nativeQuery = true)
+    List<Client> getClientListWithoutReportsMoreThan2Days();
+
     List<Client> getClientByAdditionalTrailPeriod(Boolean isTtrail);
 
     List<Client> getClientByBeginAdditionalTrailPeriodNotNullAndNotificationAdditionalTrailPeriodIsFalse();

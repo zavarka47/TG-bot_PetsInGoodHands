@@ -39,16 +39,28 @@ public class ClientChecker {
                             "Будте добры прислать его в ближайшее време, в противном случае" +
                             "мы будем вынуждены направить к Вам волонтёра!");
         }
-        //messages.sendSimpleMessage(5398232539l, "тЕСТ");
 
     }
 
+    @Scheduled(fixedDelay = 30, timeUnit = TimeUnit.SECONDS)
+    public void task2daysDelay() {
+
+        List<Client> clients = clientService.getClientListWithoutReports();
+        for (Client client: clients) {
+            messages.sendSimpleMessage(client.getChat_id(),
+                    "Добрый день  " + client.getName() +
+                            "! Мы не получили от Вас отчёты два и более дней. " +
+                            "В связи с этим к Вам будет направлен волонтёр");
+            //можно послать сообщение репортёру
+        }
+
+    }
     @Scheduled(cron = "0 31 19 * * *")
     //@Scheduled(fixedDelay = 30, timeUnit = TimeUnit.SECONDS)
     public void taskTrial() {
         List<Client> clients = clientService.getClientListWithoutReports();
         for (Client client: clients) {
-            messages.sendSimpleMessage(5398232539l, client.getName());
+            messages.sendSimpleMessage(client.getChat_id(), client.getName());
 
         }
     }
@@ -75,7 +87,7 @@ public class ClientChecker {
         for (Client client: clients) {
             messages.sendSimpleMessage(client.getChat_id(),
                     "Добрый день  " + client.getName() +
-                            "! Ваш испытательный срок c завершен !");
+                            "! Ваш испытательный срок завершен !");
             client.setNotificationTrailPeriodIsOver(true);
             clientService.saveClient(client);
         }
