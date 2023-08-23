@@ -27,7 +27,7 @@ public class TakeContactHandler implements TelegramHandler {
         Long shelterId = Long.parseLong(update.callbackQuery().data().substring(10));
         messages.sendSimpleMessage(update.callbackQuery().from().id(),
                 "Введите свои данные в формате:\n" +
-                        shelterId + ", Иванов Иван Иванович, 88005553535\n"+
+                        shelterId + "_Иванов Иван Иванович_88005553535\n"+
                 "ВНИМАНИЕ! Цифра указанная перед именем должна быть указанна как в примере");
 
 

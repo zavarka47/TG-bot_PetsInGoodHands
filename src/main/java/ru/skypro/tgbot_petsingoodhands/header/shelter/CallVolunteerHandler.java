@@ -7,6 +7,7 @@ import ru.skypro.tgbot_petsingoodhands.message.Messages;
 import ru.skypro.tgbot_petsingoodhands.service.VolunteerService;
 
 import java.util.Objects;
+import java.util.Optional;
 import java.util.regex.Pattern;
 @Component
 public class CallVolunteerHandler implements TelegramHandler {
@@ -27,10 +28,11 @@ public class CallVolunteerHandler implements TelegramHandler {
 
     @Override
     public void handleUpdate(Update update) {
-        Long shelterId = Long.parseLong(update.callbackQuery().data().substring(10));
+        Long shelterId = Long.parseLong(update.callbackQuery().data().substring(11));
         Long chatIdClient = update.callbackQuery().from().id();
+        String clientName = Optional.ofNullable(update.callbackQuery().from().username()).orElse(update.callbackQuery().from().firstName() + " " + update.callbackQuery().from().lastName());
         Long chatIdVolunteer = volunteerService.getChatIdBySheltersId(shelterId);
-        messages.sendSimpleMessage(chatIdVolunteer,"Необходима помощь " + chatIdClient);
+        messages.sendSimpleMessage(chatIdVolunteer,"Необходима помощь " + clientName);
         messages.sendSimpleMessage(chatIdClient,"Помощь в пути, ожидайте ");
 
 
