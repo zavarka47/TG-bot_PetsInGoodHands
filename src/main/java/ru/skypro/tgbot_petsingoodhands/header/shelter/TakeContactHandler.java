@@ -10,7 +10,7 @@ import java.util.Objects;
 import java.util.regex.Pattern;
 @Component
 public class TakeContactHandler implements TelegramHandler {
-    private final Pattern pattern = Pattern.compile("0.0.6.1.1.\\d+");
+    private final Pattern pattern = Pattern.compile("0.0.5.1.1.\\d+");
     private final Messages messages;
 
     public TakeContactHandler(Messages messages) {

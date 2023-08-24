@@ -1,4 +1,4 @@
-package ru.skypro.tgbot_petsingoodhands.header.shelter;
+package ru.skypro.tgbot_petsingoodhands.header;
 
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.model.request.InlineKeyboardButton;

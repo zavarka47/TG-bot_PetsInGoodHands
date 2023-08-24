@@ -30,7 +30,7 @@ public class WorkHourShelterHandler implements TelegramHandler {
     public void handleUpdate(Update update) {
         Long chatId = update.callbackQuery().from().id();
         Long shelterId = Long.parseLong(update.callbackQuery().data().substring(10));
-        messages.sendSimpleMessage(chatId, shelterService.getShelterById(shelterId).getWorkHours());
+        messages.sendSimpleMessage(chatId, shelterService.getShelterById(shelterId).getAddress());
 
 
     }

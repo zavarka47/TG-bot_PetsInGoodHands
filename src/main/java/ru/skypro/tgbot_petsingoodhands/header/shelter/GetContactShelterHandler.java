@@ -15,7 +15,7 @@ public class GetContactShelterHandler implements TelegramHandler {
 
     private final Messages messages;
     private final ShelterService shelterService;
-    private final Pattern pattern = Pattern.compile("0.0.5.1.1.\\d+");
+    private final Pattern pattern = Pattern.compile("0.0.3.1.1.\\d+");
 
     public GetContactShelterHandler( Messages messages, ShelterService shelterService) {
         this.messages = messages;

@@ -33,6 +33,8 @@ public class SaveContactHandler implements TelegramHandler {
     @Override
     public void handleUpdate(Update update) {
         Matcher matcher = pattern.matcher(update.message().text());
+        boolean b = matcher.find();
+
         Long sheltersId = Long.parseLong(matcher.group(1));
         String clientName = matcher.group(2);
         String clientPhone = matcher.group(3);

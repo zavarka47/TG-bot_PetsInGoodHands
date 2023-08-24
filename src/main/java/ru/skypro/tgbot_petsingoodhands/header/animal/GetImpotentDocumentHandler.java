@@ -1,19 +1,19 @@
-package ru.skypro.tgbot_petsingoodhands.header.shelter;
+package ru.skypro.tgbot_petsingoodhands.header.animal;
 
 import com.pengrad.telegrambot.model.Update;
 import org.springframework.stereotype.Component;
 import ru.skypro.tgbot_petsingoodhands.header.TelegramHandler;
 import ru.skypro.tgbot_petsingoodhands.message.Messages;
+import ru.skypro.tgbot_petsingoodhands.service.AnimalService;
 import ru.skypro.tgbot_petsingoodhands.service.ShelterService;
 
 import java.util.Objects;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 @Component
 public class GetImpotentDocumentHandler implements TelegramHandler {
     private final Messages messages;
     private final ShelterService shelterService;
-    private final Pattern pattern = Pattern.compile("0.0.3.1.1.\\d+");
+    private Pattern pattern = Pattern.compile("0.0.2.2.1.\\d+");
 
     public GetImpotentDocumentHandler(Messages messages, ShelterService shelterService) {
         this.messages = messages;
