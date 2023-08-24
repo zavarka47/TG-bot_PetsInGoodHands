@@ -27,13 +27,13 @@ public class SaveContactHandler implements TelegramHandler {
 
     @Override
     public boolean appliesTo(Update update) {
-        return Objects.nonNull(update.message()) ? pattern.matcher(update.message().text()).find() : false;
+        return Objects.nonNull(update.message().text()) ? pattern.matcher(update.message().text()).find() : false;
     }
 
     @Override
     public void handleUpdate(Update update) {
         Matcher matcher = pattern.matcher(update.message().text());
-        boolean b = matcher.find();
+        matcher.find();
 
         Long sheltersId = Long.parseLong(matcher.group(1));
         String clientName = matcher.group(2);
