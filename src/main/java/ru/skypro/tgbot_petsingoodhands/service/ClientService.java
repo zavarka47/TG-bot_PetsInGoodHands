@@ -74,4 +74,7 @@ public class ClientService {
         return clientRepository.getClientsByTrailPeriodIsOverTrueAndNotificationTrailPeriodIsOverFalse();
 
     }
+    public Client getByChatId (Long chatId){
+        return clientRepository.findByChatId(chatId);
+    }
 }

@@ -29,10 +29,10 @@ public class ReportChecker {
             report.setNotificationAboutQualityReport(true);
             reportService.saveReport(report);
             if (checkReport(report)) {
-                messages.sendSimpleMessage(report.getClient().getChat_id(),
+                messages.sendSimpleMessage(report.getClient().getChatId(),
                         "Добрый день, отчет по клиенту   " + report.getClient().getName() + " хороший!");
             } else {
-                messages.sendSimpleMessage(report.getClient().getChat_id(),
+                messages.sendSimpleMessage(report.getClient().getChatId(),
                         "Добрый день, отчет по клиенту   " + report.getClient().getName() + " плохой!");
             }
         }

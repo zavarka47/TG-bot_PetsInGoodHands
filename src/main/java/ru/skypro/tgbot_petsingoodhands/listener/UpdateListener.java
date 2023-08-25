@@ -47,12 +47,16 @@ public class UpdateListener implements UpdatesListener {
                 for (TelegramHandler handler : handlers) {
                     if (handler.appliesTo(update)){
                         handler.handleUpdate(update);
+                        messageHandler = true;
                     }
-                    messageHandler = true;
+
                 }
-                if (!messageHandler){
+                if (!messageHandler ){
                     messages.sendSimpleMessage(chatId, "Такой команды я не знаю :(");
                 }
+
+
+
             });
         } catch (Exception e){
             logger.error(e.getMessage(), e);

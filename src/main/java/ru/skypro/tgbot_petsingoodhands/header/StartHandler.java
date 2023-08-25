@@ -1,4 +1,4 @@
-package ru.skypro.tgbot_petsingoodhands.header.shelter;
+package ru.skypro.tgbot_petsingoodhands.header;
 
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
@@ -26,7 +26,7 @@ public final class StartHandler implements TelegramHandler {
 
     @Override
     public boolean appliesTo(Update update) {
-        return Objects.nonNull(update.message()) && update.message().text().equals("/start");
+        return Objects.nonNull(update.message().text()) && update.message().text().equals("/start");
     }
 
     @Override

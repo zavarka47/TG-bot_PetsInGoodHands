@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 public class AboutShelterHandler implements TelegramHandler {
     private final Messages messages;
     private final ShelterService shelterService;
-    private final Pattern pattern = Pattern.compile("(1)(!!)(//d+)(!!)(1)");
+    private final Pattern pattern = Pattern.compile("0.0.1.1.1.\\d+");
     /* Группа 1 - вход в меню "Узнать информацию о приюте"
     Группа 3 - соответствует ID Приюта
     Группа 5 - соответствует команде которую мы хотим получить
@@ -33,8 +33,7 @@ public class AboutShelterHandler implements TelegramHandler {
     @Override
     public void handleUpdate(Update update) {
         Long chatId = update.callbackQuery().from().id();
-        Matcher matcher = pattern.matcher(update.callbackQuery().data());
-        Long shelterId = Long.parseLong(matcher.group(5));
+        Long shelterId = Long.parseLong(update.callbackQuery().data().substring(10));
         messages.sendSimpleMessage(chatId, shelterService.getShelterById(shelterId).getAbout());/// Будет меняться метод get в зависимости от цифры указанной в 5 группе
 
         }

@@ -15,7 +15,7 @@ public class GetContactShelterHandler implements TelegramHandler {
 
     private final Messages messages;
     private final ShelterService shelterService;
-    private final Pattern pattern = Pattern.compile("(1)(!!)(shelter_id)(!!)(2)");
+    private final Pattern pattern = Pattern.compile("0.0.3.1.1.\\d+");
 
     public GetContactShelterHandler( Messages messages, ShelterService shelterService) {
         this.messages = messages;
@@ -31,8 +31,7 @@ public class GetContactShelterHandler implements TelegramHandler {
     @Override
     public void handleUpdate(Update update) {
         Long chatId = update.callbackQuery().from().id();
-        Matcher matcher = pattern.matcher(update.callbackQuery().data());
-        Long shelterId = Long.parseLong(matcher.group(5));
+        Long shelterId = Long.parseLong(update.callbackQuery().data().substring(10));
         messages.sendSimpleMessage(chatId, shelterService.getShelterById(shelterId).getContacts());
 
         }

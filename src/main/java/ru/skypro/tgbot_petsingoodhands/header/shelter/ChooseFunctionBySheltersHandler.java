@@ -29,13 +29,15 @@ public class ChooseFunctionBySheltersHandler implements TelegramHandler {
     public void handleUpdate(Update update) {
         InlineKeyboardMarkup keyBoard = new InlineKeyboardMarkup();
         Long shelterId = Long.parseLong(update.callbackQuery().data().substring(10));
-        InlineKeyboardButton button1 = new InlineKeyboardButton("Узнать о приюте").callbackData("(1)(!!)(" + shelterId + ")(!!)(1)");
-        InlineKeyboardButton button2 = new InlineKeyboardButton("Узнать расписание работы приюта и адрес, схему проезда").callbackData("(1)(!!)(" + shelterId + ")(!!)(2)");
-        InlineKeyboardButton button3 = new InlineKeyboardButton("Узнать контактные данные охраны для оформления пропуска на машину.").callbackData("(1)(!!)(" + shelterId + ")(!!)(3)");
-        InlineKeyboardButton button4 = new InlineKeyboardButton("Узнать общие рекомендации о технике безопасности на территории приюта.").callbackData("(1)(!!)(" + shelterId + ")(!!)(4)");
-        InlineKeyboardButton button5 = new InlineKeyboardButton("Принять и записать контактные данные для связи.").callbackData("(1)(!!)(" + shelterId + ")(!!)(5)");
-        InlineKeyboardButton button6 = new InlineKeyboardButton("Узнать о приюте").callbackData("0");
+        InlineKeyboardButton button1 = new InlineKeyboardButton("О приюте").callbackData("0.0.1.1.1." + shelterId);/// aboutShelters
+        InlineKeyboardButton button2 = new InlineKeyboardButton("Расписание работы, адрес и схема проезда").callbackData("0.0.2.1.1."+ shelterId);/// WorkHourShelterHandler
+        InlineKeyboardButton button3 = new InlineKeyboardButton("Контактные данные охраны для оформления пропуска").callbackData("0.0.3.1.1."+ shelterId);///TakeContactHandler
+        InlineKeyboardButton button4 = new InlineKeyboardButton("Рекомендации о технике безопасности на территории приюта").callbackData("0.0.4.1.1."+ shelterId);/// SafetyRecommendationsShelterHandler
+        InlineKeyboardButton button5 = new InlineKeyboardButton("Записать контактные данные для связи").callbackData("0.0.5.1.1."+ shelterId); ///TakeContactHandler
+        InlineKeyboardButton button6 = new InlineKeyboardButton("Позвать волонтера").callbackData("1.0.0.0.0."+ shelterId);/// СallVolunteerHandler
         keyBoard.addRow(button1).addRow(button2).addRow(button3).addRow(button4).addRow(button5).addRow(button6);
+
+
 
         messages.sendMessageWithKeyboard(update.callbackQuery().from().id(), "Выберете пункт который Вас интересует", keyBoard);
 

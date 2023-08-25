@@ -33,7 +33,7 @@ public class ClientChecker {
 
         List<Client> clients = clientService.getClientListWithoutReports();
         for (Client client: clients) {
-            messages.sendSimpleMessage(client.getChat_id(),
+            messages.sendSimpleMessage(client.getChatId(),
                     "Добрый день  " + client.getName() +
                             "! Мы не получили от Вас отчёт за вчерашний день!" +
                             "Будте добры прислать его в ближайшее време, в противном случае" +
@@ -58,7 +58,7 @@ public class ClientChecker {
 
         List<Client> clients = clientService.getClientByBeginAdditionalTrailPeriodNotNullAndNotificationAdditionalTrailPeriodIsFalse();
         for (Client client: clients) {
-            messages.sendSimpleMessage(client.getChat_id(),
+            messages.sendSimpleMessage(client.getChatId(),
                     "Добрый день  " + client.getName() +
                             "! Вам назначен дополнительный испытательный срок c " + client.getBeginAdditionalTrailPeriod() +
                             " на срок " + client.getAdditionalTrailPeriod() + " дней!");
@@ -73,7 +73,7 @@ public class ClientChecker {
 
         List<Client> clients = clientService.getClientsByTrailPeriodIsOverTrueAndNotificationTrailPeriodIsOverFalse();
         for (Client client: clients) {
-            messages.sendSimpleMessage(client.getChat_id(),
+            messages.sendSimpleMessage(client.getChatId(),
                     "Добрый день  " + client.getName() +
                             "! Ваш испытательный срок c завершен !");
             client.setNotificationTrailPeriodIsOver(true);

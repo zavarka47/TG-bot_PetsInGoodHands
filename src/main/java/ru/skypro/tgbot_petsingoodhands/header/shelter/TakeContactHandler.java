@@ -1,25 +1,21 @@
 package ru.skypro.tgbot_petsingoodhands.header.shelter;
 
+import com.pengrad.telegrambot.model.Message;
 import com.pengrad.telegrambot.model.Update;
 import org.springframework.stereotype.Component;
 import ru.skypro.tgbot_petsingoodhands.header.TelegramHandler;
 import ru.skypro.tgbot_petsingoodhands.message.Messages;
-import ru.skypro.tgbot_petsingoodhands.service.ShelterService;
 
 import java.util.Objects;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 @Component
-public class WorkHourShelterHandler implements TelegramHandler {
+public class TakeContactHandler implements TelegramHandler {
+    private final Pattern pattern = Pattern.compile("0.0.5.1.1.\\d+");
     private final Messages messages;
-    private final ShelterService shelterService;
-    private final Pattern pattern = Pattern.compile("0.0.2.1.1.\\d+");
 
-    public WorkHourShelterHandler(Messages messages, ShelterService shelterService) {
+    public TakeContactHandler(Messages messages) {
         this.messages = messages;
-        this.shelterService = shelterService;
     }
-
 
     @Override
     public boolean appliesTo(Update update) {
@@ -28,9 +24,11 @@ public class WorkHourShelterHandler implements TelegramHandler {
 
     @Override
     public void handleUpdate(Update update) {
-        Long chatId = update.callbackQuery().from().id();
         Long shelterId = Long.parseLong(update.callbackQuery().data().substring(10));
-        messages.sendSimpleMessage(chatId, shelterService.getShelterById(shelterId).getAddress());
+        messages.sendSimpleMessage(update.callbackQuery().from().id(),
+                "Введите свои данные в формате:\n" +
+                        shelterId + "_Иванов Иван Иванович_88005553535\n"+
+                "ВНИМАНИЕ! Цифра указанная перед именем должна быть указанна как в примере");
 
 
     }
