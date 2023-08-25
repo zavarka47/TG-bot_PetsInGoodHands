@@ -18,7 +18,7 @@ public class Client {
     private Shelter shelter;
     private String name;
     private String phone;
-    private Long chat_id;
+    private Long chatId;
     private LocalDate beginTrailPeriod;
     private boolean trailPeriodIsOver;
     private boolean notificationTrailPeriodIsOver;
@@ -44,8 +44,8 @@ public class Client {
         return phone;
     }
 
-    public Long getChat_id() {
-        return chat_id;
+    public Long getChatId() {
+        return chatId;
     }
 
 

@@ -44,7 +44,7 @@ public class SaveContactHandler implements TelegramHandler {
         client.setShelter(shelterService.getShelterById(sheltersId));
         client.setName(clientName);
         client.setPhone(clientPhone);
-        client.setChat_id(clientChatId);
+        client.setChatId(clientChatId);
         clientService.saveClient(client);
         messages.sendSimpleMessage(clientChatId, "Ваш контакт сохранен");
     }

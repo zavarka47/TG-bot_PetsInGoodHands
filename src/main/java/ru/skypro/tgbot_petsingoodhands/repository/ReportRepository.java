@@ -3,6 +3,7 @@ package ru.skypro.tgbot_petsingoodhands.repository;
 import liquibase.pro.packaged.B;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import ru.skypro.tgbot_petsingoodhands.entity.Client;
 import ru.skypro.tgbot_petsingoodhands.entity.Report;
@@ -16,5 +17,8 @@ public interface ReportRepository extends JpaRepository<Report, Long> {
     List<Report> getReportByDataTimeReportAfter (LocalDateTime localDateTime);
 
     List<Report> getReportByNotificationAboutQualityReport(Boolean notificationAboutQuality);
+
+    @Query(value = "Select * from report where date(data_time_report) = current_date /*and client_id = id*/", nativeQuery = true)
+    Report getTodayReportByClientId ( /*@Param("id") Long id*/);
 
 }
