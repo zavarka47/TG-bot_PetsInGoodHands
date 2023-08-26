@@ -1,9 +1,12 @@
 package ru.skypro.tgbot_petsingoodhands.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Data
 public class Shelter {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -63,4 +66,5 @@ public class Shelter {
     public void setShelterName(String shelterName) {
         ShelterName = shelterName;
     }
+
 }
