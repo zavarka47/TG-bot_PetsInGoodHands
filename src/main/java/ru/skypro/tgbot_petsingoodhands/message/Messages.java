@@ -30,4 +30,12 @@ public class Messages {
             logger.error("Error during sending message: {}", sendResponse.description());
         }
     }
+
+    public void sendMessageWithMarkdown (Long chatId, String text){
+        SendResponse sendResponse = telegramBot.execute(
+                new SendMessage(chatId, text).parseMode(ParseMode.MarkdownV2));
+        if (!sendResponse.isOk()){
+            logger.error("Error during sending message: {}", sendResponse.description());
+        }
+    }
 }

@@ -6,7 +6,7 @@ import com.pengrad.telegrambot.model.Update;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import ru.skypro.tgbot_petsingoodhands.header.TelegramHandler;
+import ru.skypro.tgbot_petsingoodhands.handler.TelegramHandler;
 import ru.skypro.tgbot_petsingoodhands.message.Messages;
 
 import javax.annotation.PostConstruct;
