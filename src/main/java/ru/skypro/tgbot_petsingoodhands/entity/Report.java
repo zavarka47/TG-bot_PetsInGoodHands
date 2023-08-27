@@ -1,6 +1,7 @@
 package ru.skypro.tgbot_petsingoodhands.entity;
 
 import lombok.Data;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

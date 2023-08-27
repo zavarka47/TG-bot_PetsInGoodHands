@@ -6,7 +6,7 @@ import com.pengrad.telegrambot.model.Update;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import ru.skypro.tgbot_petsingoodhands.header.TelegramHandler;
+import ru.skypro.tgbot_petsingoodhands.handler.TelegramHandler;
 import ru.skypro.tgbot_petsingoodhands.message.Messages;
 
 import javax.annotation.PostConstruct;
@@ -47,12 +47,16 @@ public class UpdateListener implements UpdatesListener {
                 for (TelegramHandler handler : handlers) {
                     if (handler.appliesTo(update)){
                         handler.handleUpdate(update);
+                        messageHandler = true;
                     }
-                    messageHandler = true;
+
                 }
-                if (!messageHandler){
+                if (!messageHandler ){
                     messages.sendSimpleMessage(chatId, "Такой команды я не знаю :(");
                 }
+
+
+
             });
         } catch (Exception e){
             logger.error(e.getMessage(), e);

@@ -5,4 +5,5 @@ import org.springframework.stereotype.Repository;
 import ru.skypro.tgbot_petsingoodhands.entity.Volunteer;
 @Repository
 public interface VolunteerRepository extends JpaRepository<Volunteer, Long> {
+    public Volunteer getVolunteerByShelter_ShelterId(Long sheltersId);
 }

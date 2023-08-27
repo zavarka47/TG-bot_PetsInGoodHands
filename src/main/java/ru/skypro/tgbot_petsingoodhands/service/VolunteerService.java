@@ -10,4 +10,9 @@ public class VolunteerService {
     public VolunteerService(VolunteerRepository volunteerRepository) {
         this.volunteerRepository = volunteerRepository;
     }
+
+    public Long getChatIdBySheltersId (Long sheltersId) {
+        return volunteerRepository.getVolunteerByShelter_ShelterId(sheltersId).getChatId();
+    }
 }
+

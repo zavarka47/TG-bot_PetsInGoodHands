@@ -1,16 +1,14 @@
-package ru.skypro.tgbot_petsingoodhands.header.animal;
+package ru.skypro.tgbot_petsingoodhands.handler;
 
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
 import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import org.springframework.stereotype.Component;
-import ru.skypro.tgbot_petsingoodhands.header.TelegramHandler;
 import ru.skypro.tgbot_petsingoodhands.message.Messages;
 import ru.skypro.tgbot_petsingoodhands.service.AnimalService;
 import ru.skypro.tgbot_petsingoodhands.service.ShelterService;
 
 import java.util.Objects;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 @Component
 public class MidChooseKeyboard implements TelegramHandler {
@@ -39,7 +37,7 @@ public class MidChooseKeyboard implements TelegramHandler {
         InlineKeyboardButton button1 = new InlineKeyboardButton("Узнать информацию о приюте").callbackData("0.0.0.1.1." + shelterId);
         InlineKeyboardButton button2 = new InlineKeyboardButton("Как взять животное из приюта").callbackData("0.0.0.2.1." + shelterId);
         InlineKeyboardButton button3 = new InlineKeyboardButton("Прислать отчет о питомце").callbackData("0.0.0.3.1." + shelterId);
-        InlineKeyboardButton button4 = new InlineKeyboardButton("Позвать волонтер").callbackData("0.0.0.4.1." + shelterId);
+        InlineKeyboardButton button4 = new InlineKeyboardButton("Позвать волонтер").callbackData("1.0.0.0.0."+ shelterId);
         keyBoard.addRow(button1).addRow(button2).addRow(button3).addRow(button4);
         messages.sendMessageWithKeyboard(chatId, "Выберете пункт который Вас интересует", keyBoard);
 

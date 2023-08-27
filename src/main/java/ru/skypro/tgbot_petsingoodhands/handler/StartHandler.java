@@ -1,11 +1,10 @@
-package ru.skypro.tgbot_petsingoodhands.header.shelter;
+package ru.skypro.tgbot_petsingoodhands.handler;
 
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
 import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import org.springframework.stereotype.Component;
 import ru.skypro.tgbot_petsingoodhands.entity.Animal;
-import ru.skypro.tgbot_petsingoodhands.header.TelegramHandler;
 import ru.skypro.tgbot_petsingoodhands.message.Messages;
 import ru.skypro.tgbot_petsingoodhands.service.AnimalService;
 
@@ -26,7 +25,7 @@ public final class StartHandler implements TelegramHandler {
 
     @Override
     public boolean appliesTo(Update update) {
-        return Objects.nonNull(update.message()) && update.message().text().equals("/start");
+        return Objects.nonNull(update.message()) ? Objects.nonNull(update.message().text()) && update.message().text().toLowerCase().equals("/start") : false;
     }
 
     @Override
