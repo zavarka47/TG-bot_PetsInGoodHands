@@ -2,15 +2,11 @@ package ru.skypro.tgbot_petsingoodhands.handler.animal;
 
 import com.pengrad.telegrambot.BotUtils;
 import com.pengrad.telegrambot.model.Update;
-import com.pengrad.telegrambot.model.request.Keyboard;
-import net.bytebuddy.asm.Advice;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
-import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -30,7 +26,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class ChooseFunctionByAnimalHandlerTest {
+public class InitialAppealFromDogHandlerTest {
     @Mock
     private Messages messages;
     @Mock
@@ -38,43 +34,42 @@ public class ChooseFunctionByAnimalHandlerTest {
     @Mock
     private ShelterService shelterService;
     @InjectMocks
-    private ChooseFunctionByAnimalHandler chooseFunctionByAnimalHandler;
+    private InitialAppealFromDogHandler initialAppealFromDogHandler;
     private static Update update;
-    Pattern pattern = Pattern.compile("0.0.0.2.1.\\d+");
+    Pattern pattern = Pattern.compile("0.0.7.2.1.\\d+");
+
     @BeforeAll
     public static void initializationResource() throws URISyntaxException, IOException {
         String callbackQuery = Files.readString(Path.of(
                 ChooseFunctionByAnimalHandlerTest.class.getClassLoader().getResource("callbackQuery.json").toURI()));
-        update = BotUtils.fromJson(callbackQuery.replace("%text%", "0.0.0.2.1.1"), Update.class);
-
+        update = BotUtils.fromJson(callbackQuery.replace("%text%", "0.0.7.2.1.1"), Update.class);
     }
+
     @Test
-    public void appliesToTest(){
+    public void appliesToTest() {
         Assertions.assertTrue(pattern.matcher(update.callbackQuery().data()).find());
     }
 
     @Test
-    public void handleUpdateTest(){
+    public void handleUpdateTest() {
         var shelter = mock(Shelter.class);
         var animal = mock(Animal.class);
         when(shelterService.getShelterById(any())).thenReturn(shelter);
         when(shelter.getAnimal()).thenReturn(animal);
         when(animalService.getById(any())).thenReturn(animal);
-        when(animal.getType()).thenReturn("пёс");
-
-        chooseFunctionByAnimalHandler.handleUpdate(update);
+        when(animal.getInitialAppealFromDogHandler()).thenReturn("Советы кинолога по первичному общению с псом");
+        initialAppealFromDogHandler.handleUpdate(update);
 
         ArgumentCaptor<Long> chatIdCaptor = ArgumentCaptor.forClass(Long.class);
         ArgumentCaptor<String> textCaptor = ArgumentCaptor.forClass(String.class);
-        ArgumentCaptor<Keyboard> keyboardCaptor = ArgumentCaptor.forClass(Keyboard.class);
 
-        verify(messages).sendMessageWithKeyboard(chatIdCaptor.capture(), textCaptor.capture(), keyboardCaptor.capture());
+        verify(messages).sendSimpleMessage(chatIdCaptor.capture(), textCaptor.capture());
 
         Long chatId = chatIdCaptor.getValue();
-        String text =  textCaptor.getValue();
+        String text = textCaptor.getValue();
 
         Assertions.assertEquals(chatId, update.callbackQuery().from().id());
-        Assertions.assertTrue(text.contains("Выберете пункт"));
+        Assertions.assertEquals(text, "Советы кинолога по первичному общению с псом");
 
     }
 }

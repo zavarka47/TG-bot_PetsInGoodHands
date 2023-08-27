@@ -2,19 +2,14 @@ package ru.skypro.tgbot_petsingoodhands.handler.animal;
 
 import com.pengrad.telegrambot.BotUtils;
 import com.pengrad.telegrambot.model.Update;
-import com.pengrad.telegrambot.model.request.Keyboard;
-import net.bytebuddy.asm.Advice;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
-import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import ru.skypro.tgbot_petsingoodhands.entity.Animal;
 import ru.skypro.tgbot_petsingoodhands.entity.Shelter;
 import ru.skypro.tgbot_petsingoodhands.message.Messages;
 import ru.skypro.tgbot_petsingoodhands.service.AnimalService;
@@ -28,9 +23,8 @@ import java.util.regex.Pattern;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
-
 @ExtendWith(MockitoExtension.class)
-public class ChooseFunctionByAnimalHandlerTest {
+public class GetImpotentDocumentHandlerTest {
     @Mock
     private Messages messages;
     @Mock
@@ -38,15 +32,14 @@ public class ChooseFunctionByAnimalHandlerTest {
     @Mock
     private ShelterService shelterService;
     @InjectMocks
-    private ChooseFunctionByAnimalHandler chooseFunctionByAnimalHandler;
+    private GetImpotentDocumentHandler getImpotentDocumentHandler;
     private static Update update;
-    Pattern pattern = Pattern.compile("0.0.0.2.1.\\d+");
+    Pattern pattern = Pattern.compile("0.0.2.2.1.\\d+");
     @BeforeAll
     public static void initializationResource() throws URISyntaxException, IOException {
         String callbackQuery = Files.readString(Path.of(
                 ChooseFunctionByAnimalHandlerTest.class.getClassLoader().getResource("callbackQuery.json").toURI()));
-        update = BotUtils.fromJson(callbackQuery.replace("%text%", "0.0.0.2.1.1"), Update.class);
-
+        update = BotUtils.fromJson(callbackQuery.replace("%text%", "0.0.2.2.1.1"), Update.class);
     }
     @Test
     public void appliesToTest(){
@@ -56,25 +49,21 @@ public class ChooseFunctionByAnimalHandlerTest {
     @Test
     public void handleUpdateTest(){
         var shelter = mock(Shelter.class);
-        var animal = mock(Animal.class);
         when(shelterService.getShelterById(any())).thenReturn(shelter);
-        when(shelter.getAnimal()).thenReturn(animal);
-        when(animalService.getById(any())).thenReturn(animal);
-        when(animal.getType()).thenReturn("пёс");
+        when(shelter.getDocumentsForAdoption()).thenReturn("Список документов");
 
-        chooseFunctionByAnimalHandler.handleUpdate(update);
+        getImpotentDocumentHandler.handleUpdate(update);
 
         ArgumentCaptor<Long> chatIdCaptor = ArgumentCaptor.forClass(Long.class);
         ArgumentCaptor<String> textCaptor = ArgumentCaptor.forClass(String.class);
-        ArgumentCaptor<Keyboard> keyboardCaptor = ArgumentCaptor.forClass(Keyboard.class);
 
-        verify(messages).sendMessageWithKeyboard(chatIdCaptor.capture(), textCaptor.capture(), keyboardCaptor.capture());
+        verify(messages).sendSimpleMessage(chatIdCaptor.capture(), textCaptor.capture());
 
         Long chatId = chatIdCaptor.getValue();
         String text =  textCaptor.getValue();
 
         Assertions.assertEquals(chatId, update.callbackQuery().from().id());
-        Assertions.assertTrue(text.contains("Выберете пункт"));
+        Assertions.assertEquals(text, "Список документов");
 
     }
 }

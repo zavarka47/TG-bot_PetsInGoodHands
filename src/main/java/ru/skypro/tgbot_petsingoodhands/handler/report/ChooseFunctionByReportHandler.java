@@ -32,7 +32,7 @@ public class ChooseFunctionByReportHandler implements TelegramHandler {
         InlineKeyboardMarkup keyBoard = new InlineKeyboardMarkup();
         InlineKeyboardButton button1 = new InlineKeyboardButton("Получить форму отчета").callbackData("0.0.1.3.1." + shelterId);
         InlineKeyboardButton button2 = new InlineKeyboardButton("Прислать заполненный отчет").callbackData("0.0.2.3.1." + shelterId);
-        InlineKeyboardButton button3 = new InlineKeyboardButton("Позвать волонтер").callbackData("1.0.0.0.0."+ shelterId);
+        InlineKeyboardButton button3 = new InlineKeyboardButton("Позвать волонтера").callbackData("1.0.0.0.0."+ shelterId);
         keyBoard.addRow(button1).addRow(button2).addRow(button3);
         messages.sendMessageWithKeyboard(chatId, "Выберете пункт который Вас интересует", keyBoard);
     }

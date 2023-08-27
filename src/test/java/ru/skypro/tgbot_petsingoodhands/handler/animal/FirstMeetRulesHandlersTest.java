@@ -11,6 +11,8 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import ru.skypro.tgbot_petsingoodhands.entity.Animal;
+import ru.skypro.tgbot_petsingoodhands.entity.Shelter;
 import ru.skypro.tgbot_petsingoodhands.message.Messages;
 import ru.skypro.tgbot_petsingoodhands.service.AnimalService;
 import ru.skypro.tgbot_petsingoodhands.service.ShelterService;
@@ -22,8 +24,7 @@ import java.nio.file.Path;
 import java.util.regex.Pattern;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class FirstMeetRulesHandlersTest {
@@ -48,10 +49,16 @@ public class FirstMeetRulesHandlersTest {
         Assertions.assertTrue(pattern.matcher(update.callbackQuery().data()).find());
     }
 
+    @Test
     public void handleUpdateTest(){
-        firstMeetRulesHandlers.handleUpdate(update);
+        var shelter = mock(Shelter.class);
+        var animal = mock(Animal.class);
+        when(shelterService.getShelterById(any())).thenReturn(shelter);
+        when(shelter.getAnimal()).thenReturn(animal);
+        when(animalService.getById(any())).thenReturn(animal);
+        when(animal.getFirstImpressionInShelter()).thenReturn("Правила знакомства");
 
-        when(animalService.getById(any()).getFirstImpressionInShelter()).thenReturn("Правила знакомства");
+        firstMeetRulesHandlers.handleUpdate(update);
 
         ArgumentCaptor<Long> chatIdCaptor = ArgumentCaptor.forClass(Long.class);
         ArgumentCaptor<String> textCaptor = ArgumentCaptor.forClass(String.class);

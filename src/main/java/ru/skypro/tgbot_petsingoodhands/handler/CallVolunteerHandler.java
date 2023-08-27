@@ -33,10 +33,6 @@ public class CallVolunteerHandler implements TelegramHandler {
         Long chatIdVolunteer = volunteerService.getChatIdBySheltersId(shelterId);
         messages.sendSimpleMessage(chatIdVolunteer,"Необходима помощь " + clientName);
         messages.sendSimpleMessage(chatIdClient,"Помощь в пути, ожидайте");
-
-
-
-
     }
-    }
+}
 
