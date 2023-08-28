@@ -78,4 +78,8 @@ public class ClientService {
     public List<Client> getClientListWithoutReportsMoreThan2Days() {
         return clientRepository.getClientListWithoutReportsMoreThan2Days();
     }
+
+    public Client getByChatId (Long chatId){
+        return clientRepository.findByChatId(chatId);
+    }
 }

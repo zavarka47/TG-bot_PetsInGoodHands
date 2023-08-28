@@ -34,8 +34,7 @@ public class AboutShelterHandler implements TelegramHandler {
         Long chatId = update.callbackQuery().from().id();
         Long shelterId = Long.parseLong(update.callbackQuery().data().substring(10));
         messages.sendSimpleMessage(chatId, shelterService.getShelterById(shelterId).getAbout());/// Будет меняться метод get в зависимости от цифры указанной в 5 группе
-
-        }
-
     }
+
+}
 

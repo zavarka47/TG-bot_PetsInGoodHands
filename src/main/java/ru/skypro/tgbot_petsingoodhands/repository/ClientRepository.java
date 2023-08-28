@@ -22,18 +22,19 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
     List<Client> getClientListWithoutReports(LocalDateTime startDate, LocalDateTime endDate);
 
     @Query(value = "select \n" +
-            "\t*, \n" +
-            "\t (select \n" +
+            " \t*,\n" +
+            "    (select \n" +
             "\t\tdate_part('day', now() - max(rep.data_time_report)) as days\n" +
-            "\tfrom report as rep\n" +
-            "\twhere rep.client_id = client.client_id \n" +
-            "\t) AS rep_days\n" +
+            "\t from report as rep \n" +
+            "\t where rep.client_id = client.client_id) as rep_days\n" +
             "from\n" +
             "\tpublic.client AS client\n" +
             "where  (select \n" +
-            "\t\tdate_part('day', now() - max(rep.data_time_report)) as days\n" +
-            "\tfrom report as rep\n" +
-            "\twhere rep.client_id = client.client_id ) >= 2", nativeQuery = true)
+            " \t\t\tdate_part('day', now() - max(rep.data_time_report)) as days\n" +
+            " \t\tfrom report as rep where rep.client_id = client.client_id ) >= 2 \n" +
+            "\t\tor (select \n" +
+            " \t\t\tdate_part('day', now() - max(rep.data_time_report)) as days\n" +
+            " \t\tfrom report as rep where rep.client_id = client.client_id ) is null", nativeQuery = true)
     List<Client> getClientListWithoutReportsMoreThan2Days();
 
     List<Client> getClientByAdditionalTrailPeriod(Boolean isTtrail);

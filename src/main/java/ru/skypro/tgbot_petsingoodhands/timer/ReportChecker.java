@@ -35,7 +35,7 @@ public class ReportChecker {
 
             HashMap<String, Boolean> reportRespond = checkReport(report);
             if (reportRespond.isEmpty()) {
-                messages.sendSimpleMessage(report.getClient().getChat_id(),
+                messages.sendSimpleMessage(report.getClient().getChatId(),
                         "Добрый день, отчет по клиенту " + report.getClient().getName() + " хороший!");
             } else {
                 String errMessage = "Добрый день, отчет по клиенту " + report.getClient().getName()
@@ -45,7 +45,7 @@ public class ReportChecker {
                     errMessage = errMessage + " не заплнено поле " +  key + "\n";
 
                 }
-                messages.sendSimpleMessage(report.getClient().getChat_id(), errMessage);
+                messages.sendSimpleMessage(report.getClient().getChatId(), errMessage);
             }
         }
     }
