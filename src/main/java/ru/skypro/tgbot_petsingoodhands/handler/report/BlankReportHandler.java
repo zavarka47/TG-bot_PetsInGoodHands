@@ -18,12 +18,12 @@ import java.util.Objects;
 import java.util.regex.Pattern;
 
 @Component
-public class BlackReportHandler implements TelegramHandler {
+public class BlankReportHandler implements TelegramHandler {
     private final Messages messages;
     private final TelegramBot telegramBot;
     Pattern pattern = Pattern.compile("0.0.1.3.1.\\d+");
-    Logger logger = LoggerFactory.getLogger(BlackReportHandler.class);
-    public BlackReportHandler(Messages messages, TelegramBot telegramBot) {
+    Logger logger = LoggerFactory.getLogger(BlankReportHandler.class);
+    public BlankReportHandler(Messages messages, TelegramBot telegramBot) {
         this.messages = messages;
         this.telegramBot = telegramBot;
     }
@@ -38,7 +38,7 @@ public class BlackReportHandler implements TelegramHandler {
         Long chatId = update.callbackQuery().from().id();
         try {
             byte[] blankReport = Files.readAllBytes(
-                    Paths.get(BlackReportHandler.class.getClassLoader().getResource("blankReport.txt").toURI()));
+                    Paths.get(BlankReportHandler.class.getClassLoader().getResource("blankReport.txt").toURI()));
             SendDocument document = new SendDocument(chatId, blankReport);
             document.fileName("Форма отчета");
             SendResponse execute = telegramBot.execute(document);
