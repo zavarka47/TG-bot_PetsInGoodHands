@@ -65,6 +65,6 @@ public class ChooseFunctionByReportHandlerTest {
         String text = textCaptor.getValue();
 
         Assertions.assertEquals(chatId, update.callbackQuery().from().id());
-        Assertions.assertTrue(text.contains("Выберете пункт"));
+        Assertions.assertTrue(text.contains("Пришлите заполненный отчет и фото питомца"));
     }
 }
