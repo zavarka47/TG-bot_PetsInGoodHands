@@ -6,7 +6,9 @@ import ru.skypro.tgbot_petsingoodhands.entity.Report;
 import ru.skypro.tgbot_petsingoodhands.message.Messages;
 import ru.skypro.tgbot_petsingoodhands.service.ReportService;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @Component
@@ -26,26 +28,39 @@ public class ReportChecker {
 
         List<Report> reports = reportService.getReportByNotificationAboutQualityReport();
         for (Report report : reports) {
+
             report.setNotificationAboutQualityReport(true);
+
             reportService.saveReport(report);
-            if (checkReport(report)) {
+
+            HashMap<String, Boolean> reportRespond = checkReport(report);
+            if (reportRespond.isEmpty()) {
                 messages.sendSimpleMessage(report.getClient().getChatId(),
-                        "Добрый день, отчет по клиенту   " + report.getClient().getName() + " хороший!");
+                        "Добрый день, отчет по клиенту " + report.getClient().getName() + " хороший!");
             } else {
-                messages.sendSimpleMessage(report.getClient().getChatId(),
-                        "Добрый день, отчет по клиенту   " + report.getClient().getName() + " плохой!");
+                String errMessage = "Добрый день, отчет по клиенту " + report.getClient().getName()
+                                    + " имеет следующие ошибки : \n";
+                for (String key : reportRespond.keySet()) {
+
+                    errMessage = errMessage + " не заплнено поле " +  key + "\n";
+
+                }
+                messages.sendSimpleMessage(report.getClient().getChatId(), errMessage);
             }
         }
     }
 
-    private boolean checkReport(Report report) {
-        boolean idGood = true;
+    private HashMap<String, Boolean> checkReport(Report report) {
+
+        HashMap<String, Boolean> reportStatus = new HashMap<String, Boolean>();
+        
         if (report.getPhoto() == null) {
-            idGood = false;
-        } else if (report.getReport() == null) {
-            idGood = false;
+            reportStatus.put("photo", false);
         }
-        return idGood;
+        if (report.getReport() == null) {
+            reportStatus.put("report", false);
+        }
+        return reportStatus;
     }
 
 }

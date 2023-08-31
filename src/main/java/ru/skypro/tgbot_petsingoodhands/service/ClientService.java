@@ -74,6 +74,11 @@ public class ClientService {
         return clientRepository.getClientsByTrailPeriodIsOverTrueAndNotificationTrailPeriodIsOverFalse();
 
     }
+
+    public List<Client> getClientListWithoutReportsMoreThan2Days() {
+        return clientRepository.getClientListWithoutReportsMoreThan2Days();
+    }
+
     public Client getByChatId (Long chatId){
         return clientRepository.findByChatId(chatId);
     }
