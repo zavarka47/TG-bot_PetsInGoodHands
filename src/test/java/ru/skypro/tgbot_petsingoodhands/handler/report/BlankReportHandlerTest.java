@@ -26,6 +26,7 @@ import java.util.regex.Pattern;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
+/// как подсунуть текстовый файл на проверку e
 @ExtendWith(MockitoExtension.class)
     public class BlankReportHandlerTest {
     @Mock

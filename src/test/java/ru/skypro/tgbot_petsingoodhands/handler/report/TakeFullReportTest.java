@@ -44,20 +44,17 @@ public class TakeFullReportTest {
     }
     @Test
     public void handleUpdateTest() {
-        ArgumentCaptor<SendResponse> captor = ArgumentCaptor.forClass(SendResponse.class);
+
 
         takeFullReportHandler.handleUpdate(update);
 
         ArgumentCaptor<Long> chatIdCaptor = ArgumentCaptor.forClass(Long.class);
         ArgumentCaptor<String> textCaptor = ArgumentCaptor.forClass(String.class);
-        ArgumentCaptor<Keyboard> keyboardCaptor = ArgumentCaptor.forClass(Keyboard.class);
-
-        verify(messages).sendMessageWithKeyboard(chatIdCaptor.capture(), textCaptor.capture(), keyboardCaptor.capture());
-
+        verify(messages).sendSimpleMessage(chatIdCaptor.capture(), textCaptor.capture());
         Long chatId = chatIdCaptor.getValue();
         String text = textCaptor.getValue();
 
         Assertions.assertEquals(chatId, update.callbackQuery().from().id());
-        Assertions.assertTrue(text.contains("Выберете пункт"));
+        Assertions.assertTrue(text.contains("Пришлите заполненный отчет и фото питомца"));
     }
 }
