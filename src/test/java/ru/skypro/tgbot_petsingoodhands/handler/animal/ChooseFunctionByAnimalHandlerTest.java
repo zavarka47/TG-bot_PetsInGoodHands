@@ -56,6 +56,7 @@ public class ChooseFunctionByAnimalHandlerTest {
     @Test
     public void handleUpdateTest(){
 
+
         var shelter = mock(Shelter.class);
         var animal = mock(Animal.class);
         when(shelterService.getShelterById(any())).thenReturn(shelter);

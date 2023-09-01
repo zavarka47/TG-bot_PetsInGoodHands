@@ -40,7 +40,6 @@ public class BlackReportHandler implements TelegramHandler {
             byte[] blankReport = Files.readAllBytes(
                     Paths.get(BlackReportHandler.class.getClassLoader().getResource("blankReport.txt").toURI()));
             SendDocument document = new SendDocument(chatId, blankReport);
-            document.caption("бланк отчета");
             document.fileName("Форма отчета");
             SendResponse execute = telegramBot.execute(document);
             if (!execute.isOk()){
