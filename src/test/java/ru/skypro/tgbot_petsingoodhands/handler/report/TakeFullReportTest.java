@@ -35,7 +35,7 @@ public class TakeFullReportTest {
     @BeforeAll
     public static void initializationResource() throws URISyntaxException, IOException {
         String callbackQuery = Files.readString(Path.of(
-                ChooseFunctionByAnimalHandlerTest.class.getClassLoader().getResource("callbackQuery.json").toURI()));
+                TakeFullReportTest.class.getClassLoader().getResource("callbackQuery.json").toURI()));
         update = BotUtils.fromJson(callbackQuery.replace("%text%", "0.0.2.3.1.1"), Update.class);
     }
     @Test
@@ -45,12 +45,14 @@ public class TakeFullReportTest {
     @Test
     public void handleUpdateTest() {
 
-
         takeFullReportHandler.handleUpdate(update);
 
         ArgumentCaptor<Long> chatIdCaptor = ArgumentCaptor.forClass(Long.class);
         ArgumentCaptor<String> textCaptor = ArgumentCaptor.forClass(String.class);
+
+
         verify(messages).sendSimpleMessage(chatIdCaptor.capture(), textCaptor.capture());
+
         Long chatId = chatIdCaptor.getValue();
         String text = textCaptor.getValue();
 
