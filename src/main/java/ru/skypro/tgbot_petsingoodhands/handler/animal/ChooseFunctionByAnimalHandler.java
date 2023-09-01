@@ -42,7 +42,7 @@ public class ChooseFunctionByAnimalHandler implements TelegramHandler {
         InlineKeyboardButton button5 = new InlineKeyboardButton("Обустройство дома для питомца").callbackData("0.0.5.2.1."+shelterId);///HouseForAdultPetHandler
         InlineKeyboardButton button6 = new InlineKeyboardButton("Обустройство дома для немощного").callbackData("0.0.6.2.1."+shelterId);///HouseForIllPetHandler
         keyboard.addRow(button1).addRow(button2).addRow(button3).addRow(button4).addRow(button5).addRow(button6);
-        if (animalService.getById(shelterService.getShelterById(shelterId).getAnimal().getAnimalId()).getType().equals("пёс")){
+        if (animalService.getById(shelterService.getShelterById(shelterId).getAnimal().getId()).getType().equals("пёс")){
             InlineKeyboardButton button7 = new InlineKeyboardButton("Советы кинологи по общению с псом").callbackData("0.0.7.2.1."+shelterId);///InitialAppealFromDogHandler
             InlineKeyboardButton button8 = new InlineKeyboardButton("Советы кинологи по дрессировке").callbackData("0.0.8.2.1."+shelterId);///MiddleAppealFromDogHandler
             keyboard.addRow(button7).addRow(button8);

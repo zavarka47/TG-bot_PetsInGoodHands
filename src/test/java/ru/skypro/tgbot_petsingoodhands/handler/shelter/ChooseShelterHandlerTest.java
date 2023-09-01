@@ -1,16 +1,13 @@
-package ru.skypro.tgbot_petsingoodhands.handler.animal;
+package ru.skypro.tgbot_petsingoodhands.handler.shelter;
 
 import com.pengrad.telegrambot.BotUtils;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.model.request.Keyboard;
-import net.bytebuddy.asm.Advice;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
-import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -28,43 +25,40 @@ import java.util.regex.Pattern;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
-
 @ExtendWith(MockitoExtension.class)
-public class ChooseFunctionByAnimalHandlerTest {
+public class ChooseShelterHandlerTest {
+
+    @InjectMocks
+    private ChooseShelterHandler chooseShelterHandler;
+
     @Mock
     private Messages messages;
-    @Mock
-    private AnimalService animalService;
+
     @Mock
     private ShelterService shelterService;
-    @InjectMocks
-    private ChooseFunctionByAnimalHandler chooseFunctionByAnimalHandler;
+    @Mock
+    private AnimalService animalService;
     private static Update update;
-    Pattern pattern = Pattern.compile("0.0.0.2.1.\\d+");
+
+    private final Pattern pattern = Pattern.compile("0.0.1.1.1.\\d+");
+
     @BeforeAll
     public static void initializationResource() throws URISyntaxException, IOException {
         String callbackQuery = Files.readString(Path.of(
-                ChooseFunctionByAnimalHandlerTest.class.getClassLoader().getResource("callbackQuery.json").toURI()));
-        update = BotUtils.fromJson(callbackQuery.replace("%text%", "0.0.0.2.1.1"), Update.class);
-
+                ChooseShelterHandlerTest.class.getClassLoader().getResource("callbackQuery.json").toURI()));
+        update = BotUtils.fromJson(callbackQuery.replace("%text%", "0.0.1.1.1.1"), Update.class);
     }
+
     @Test
     public void appliesToTest(){
         Assertions.assertTrue(pattern.matcher(update.callbackQuery().data()).find());
     }
-
     @Test
     public void handleUpdateTest(){
 
-
         var shelter = mock(Shelter.class);
-        var animal = mock(Animal.class);
-        when(shelterService.getShelterById(any())).thenReturn(shelter);
-        when(shelter.getAnimal()).thenReturn(animal);
-        when(animalService.getById(any())).thenReturn(animal);
-        when(animal.getType()).thenReturn("пёс");
 
-        chooseFunctionByAnimalHandler.handleUpdate(update);
+        chooseShelterHandler.handleUpdate(update);
 
         ArgumentCaptor<Long> chatIdCaptor = ArgumentCaptor.forClass(Long.class);
         ArgumentCaptor<String> textCaptor = ArgumentCaptor.forClass(String.class);
@@ -76,7 +70,7 @@ public class ChooseFunctionByAnimalHandlerTest {
         String text =  textCaptor.getValue();
 
         Assertions.assertEquals(chatId, update.callbackQuery().from().id());
-        Assertions.assertTrue(text.contains("Выберете пункт"));
+        Assertions.assertTrue(text.contains("Выберете приют"));
 
     }
 }

@@ -34,7 +34,7 @@ public class HouseForAdultPetHandler  implements TelegramHandler {
     public void handleUpdate(Update update) {
         Long chatId = update.callbackQuery().from().id();
         Long shelterId = Long.parseLong(update.callbackQuery().data().substring(10));
-        Long animalId = shelterService.getShelterById(shelterId).getAnimal().getAnimalId();
+        Long animalId = shelterService.getShelterById(shelterId).getAnimal().getId();
         messages.sendSimpleMessage(chatId, animalService.getById(animalId).getHouseForAdultPet());
 
     }

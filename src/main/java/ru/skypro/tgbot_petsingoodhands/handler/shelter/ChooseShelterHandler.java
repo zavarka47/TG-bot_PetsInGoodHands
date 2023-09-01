@@ -38,9 +38,9 @@ public class ChooseShelterHandler implements TelegramHandler {
         List<Shelter> shelters = shelterService.getSheltersByAnimalTypeId(animalId);
         InlineKeyboardMarkup keyBoard = new InlineKeyboardMarkup();
         for (Shelter s : shelters) {
-            InlineKeyboardButton button = new InlineKeyboardButton(s.getShelterName()).callbackData("0.0.0.0.1." + s.getShelterId());
+            InlineKeyboardButton button = new InlineKeyboardButton(s.getShelterName()).callbackData("0.0.0.0.1." + s.getId());
             keyBoard.addRow(button);
         }
-messages.sendMessageWithKeyboard(chatId,"Выберете приют",keyBoard);
+        messages.sendMessageWithKeyboard(chatId,"Выберете приют",keyBoard);
     }
 }

@@ -61,7 +61,7 @@ public class SaveFullReportHandler implements TelegramHandler {
 
     private void savePhoto (Update update){
         Long chatId = update.message().chat().id();
-        Long clientId = Optional.of(clientService.getByChatId(chatId).getClientId()).orElse(0L);
+        Long clientId = Optional.of(clientService.getByChatId(chatId).getId()).orElse(0L);
 
         if (clientId!=0) {
             PhotoSize fullPhoto = update.message().photo()[update.message().photo().length-1];
@@ -104,7 +104,7 @@ public class SaveFullReportHandler implements TelegramHandler {
     }
     private void saveReport (Update update){
         Long chatId = update.message().chat().id();
-        Long clientId = Optional.of(clientService.getByChatId(chatId).getClientId()).orElse(0L);
+        Long clientId = Optional.of(clientService.getByChatId(chatId).getId()).orElse(0L);
         if (clientId!=0){
 
         Document document = update.message().document();

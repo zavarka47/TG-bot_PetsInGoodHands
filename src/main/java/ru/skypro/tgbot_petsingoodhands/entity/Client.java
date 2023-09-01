@@ -12,7 +12,7 @@ public class Client {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column (name = "client_id")
-    private Long clientId;
+    private Long id;
     @ManyToOne
     @JoinColumn (name = "shelterId")
     private Shelter shelter;
@@ -28,8 +28,8 @@ public class Client {
     @OneToMany (mappedBy = "client")
     private List<Report> reports;
 
-    public Long getClientId() {
-        return clientId;
+    public Long getId() {
+        return id;
     }
 
     public Shelter getShelter() {

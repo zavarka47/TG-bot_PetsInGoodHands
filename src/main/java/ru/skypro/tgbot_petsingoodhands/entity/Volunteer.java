@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class Volunteer {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Long volunteerId;
+    private Long id;
 
     private Long chatId;
     @ManyToOne

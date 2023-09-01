@@ -11,7 +11,7 @@ public class Shelter {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column (name = "shelter_id")
-    private Long shelterId;
+    private Long id;
     private String ShelterName;
     @ManyToOne
     @JoinColumn (name = "animalId")
@@ -27,8 +27,8 @@ public class Shelter {
     @OneToMany (mappedBy = "shelter")
     private List<Volunteer> volunteers;
 
-    public Long getShelterId() {
-        return shelterId;
+    public Long getId() {
+        return id;
     }
 
     public Animal getAnimal() {

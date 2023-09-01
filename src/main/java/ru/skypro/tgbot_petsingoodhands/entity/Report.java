@@ -1,7 +1,6 @@
 package ru.skypro.tgbot_petsingoodhands.entity;
 
 import lombok.Data;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -12,7 +11,7 @@ public class Report {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column (name = "report_id")
-    private Long reportId;
+    private Long id;
     @ManyToOne
     @JoinColumn (name = "clientId")
     private Client client;
@@ -22,8 +21,8 @@ public class Report {
     @Lob
     private byte[] report;
 
-    public Long getReportId() {
-        return reportId;
+    public Long getId() {
+        return id;
     }
     private boolean notificationAboutQualityReport;
 
