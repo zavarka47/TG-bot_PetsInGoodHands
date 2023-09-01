@@ -11,7 +11,7 @@ public class Animal {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column (name = "animal_id")
-    private Long animalId;
+    private Long id;
     private String type;
     private String firstImpressionInShelter;
     private String transportation;
@@ -23,8 +23,8 @@ public class Animal {
     @OneToMany (mappedBy = "animal")
     private List<Shelter>  shelters;
 
-    public Long getAnimalId() {
-        return animalId;
+    public Long getId() {
+        return id;
     }
 
     public String getType() {
