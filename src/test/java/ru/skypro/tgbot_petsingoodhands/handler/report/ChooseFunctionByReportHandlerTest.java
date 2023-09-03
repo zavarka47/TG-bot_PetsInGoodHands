@@ -57,9 +57,9 @@ public class ChooseFunctionByReportHandlerTest {
 
         ArgumentCaptor<Long> chatIdCaptor = ArgumentCaptor.forClass(Long.class);
         ArgumentCaptor<String> textCaptor = ArgumentCaptor.forClass(String.class);
-        ArgumentCaptor<Keyboard> keyboardCaptor = ArgumentCaptor.forClass(Keyboard.class);
 
-        verify(messages).sendMessageWithKeyboard(chatIdCaptor.capture(), textCaptor.capture(), keyboardCaptor.capture());
+
+        verify(messages).sendSimpleMessage(chatIdCaptor.capture(), textCaptor.capture());
 
         Long chatId = chatIdCaptor.getValue();
         String text = textCaptor.getValue();
