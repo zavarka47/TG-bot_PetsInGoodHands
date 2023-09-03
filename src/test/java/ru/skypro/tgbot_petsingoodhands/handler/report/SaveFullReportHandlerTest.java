@@ -35,13 +35,7 @@ public class SaveFullReportHandlerTest {
     private Messages messages;
 
     @Mock
-    private ShelterService shelterService;
-
-    @Mock
     private ClientService clientService;
-
-    @Mock
-    private ClientRepository clientRepository;
 
     private static Update update;
 

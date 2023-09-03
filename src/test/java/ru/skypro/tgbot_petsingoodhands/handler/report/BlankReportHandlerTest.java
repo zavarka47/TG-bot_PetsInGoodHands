@@ -66,27 +66,11 @@ public class BlankReportHandlerTest {
     private BlankReportHandler blankReportHandler;
     @Mock
     private TelegramBot telegramBot;
-    @Mock
-    private Messages messages;
-
-    @Mock
-    private ShelterService shelterService;
-
-    @Mock
-    private ClientService clientService;
-
-    @Mock
-    private ClientRepository clientRepository;
 
     private static Update update;
 
     private static Update updateCallBack;
     private final Pattern pattern = Pattern.compile("0.0.1.3.1.\\d+");
-
-    @Test
-    public void appliesToTest() {
-        Assertions.assertTrue(pattern.matcher(updateCallBack.callbackQuery().data()).find());
-    }
 
     @BeforeAll
     public static void initializationResource() throws URISyntaxException, IOException {
@@ -96,6 +80,10 @@ public class BlankReportHandlerTest {
                 SaveFullReportHandlerTest.class.getClassLoader().getResource("message.json").toURI()));
         update = BotUtils.fromJson(message.replace("%text%", "0.0.1.3.1.1"), Update.class);
         updateCallBack = BotUtils.fromJson(callbackQuery.replace("%text%", "0.0.1.3.1.1"), Update.class);
+    }
+    @Test
+    public void appliesToTest() {
+        Assertions.assertTrue(pattern.matcher(updateCallBack.callbackQuery().data()).find());
     }
     @Test
     public void handleUpdateTest() throws URISyntaxException, IOException{
