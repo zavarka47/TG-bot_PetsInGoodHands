@@ -51,20 +51,20 @@ public class ChooseFunctionByReportHandlerTest {
 
     @Test
     public void handleUpdateTest() {
-        ArgumentCaptor<SendResponse> captor = ArgumentCaptor.forClass(SendResponse.class);
+            ArgumentCaptor<SendResponse> captor = ArgumentCaptor.forClass(SendResponse.class);
 
-        chooseFunctionByReportHandler.handleUpdate(update);
+            chooseFunctionByReportHandler.handleUpdate(update);
 
-        ArgumentCaptor<Long> chatIdCaptor = ArgumentCaptor.forClass(Long.class);
-        ArgumentCaptor<String> textCaptor = ArgumentCaptor.forClass(String.class);
+            ArgumentCaptor<Long> chatIdCaptor = ArgumentCaptor.forClass(Long.class);
+            ArgumentCaptor<String> textCaptor = ArgumentCaptor.forClass(String.class);
+            ArgumentCaptor<Keyboard> keyboardCaptor = ArgumentCaptor.forClass(Keyboard.class);
 
+            verify(messages).sendMessageWithKeyboard(chatIdCaptor.capture(), textCaptor.capture(), keyboardCaptor.capture());
 
-        verify(messages).sendSimpleMessage(chatIdCaptor.capture(), textCaptor.capture());
+            Long chatId = chatIdCaptor.getValue();
+            String text = textCaptor.getValue();
 
-        Long chatId = chatIdCaptor.getValue();
-        String text = textCaptor.getValue();
-
-        Assertions.assertEquals(chatId, update.callbackQuery().from().id());
-        Assertions.assertTrue(text.contains("Выберете пункт"));
+            Assertions.assertEquals(chatId, update.callbackQuery().from().id());
+            Assertions.assertTrue(text.contains("Выберете пункт"));
     }
 }
