@@ -104,7 +104,9 @@ public class BlankReportHandlerTest {
 
         Assertions.assertEquals(document.getFileName(), "Форма отчета");
         Assertions.assertNotEquals(document.getParameters().size(), 0);
+        Assertions.assertTrue(((byte[])document.getParameters().get("document")).length > 0);
 
     }
 
 }
+
