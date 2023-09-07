@@ -58,8 +58,6 @@ public class ChooseFunctionBySheltersHandlerTest {
     @Test
     public void handleUpdateTest(){
 
-        var shelter = mock(Shelter.class);
-
         chooseFunctionBySheltersHandler.handleUpdate(update);
 
         ArgumentCaptor<Long> chatIdCaptor = ArgumentCaptor.forClass(Long.class);
