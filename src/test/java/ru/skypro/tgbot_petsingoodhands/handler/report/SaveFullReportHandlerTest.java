@@ -63,7 +63,7 @@ public class SaveFullReportHandlerTest {
         var client = mock(Client.class);
 
         when(clientService.getByChatId(any())).thenReturn(client);
-        when(client.getClientId()).thenReturn(0L);
+        when(client.getId()).thenReturn(0L);
 
         saveFullReportHandler.handleUpdate(update);
 
